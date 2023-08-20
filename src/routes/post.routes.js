@@ -1,17 +1,18 @@
 import { Router } from 'express'
 import { PostController } from "../controllers/post.controller.js";
+import { authRequired } from '../middlewares/validateToken.js';
 
 const router = Router()
 
-router.get('/', PostController.getPosts)
+router.get('/', authRequired, PostController.getPosts)
 
-router.get('/:id', PostController.getPost)
+router.get('/:id', authRequired, PostController.getPost)
 
-router.post('/new', PostController.createPost)
+router.post('/new', authRequired, PostController.createPost)
 
-router.delete('/delete/:id', PostController.deletePost)
+router.delete('/:id', authRequired, PostController.deletePost)
 
-router.put('/update/:id', PostController.updatePost)
+router.put('/:id', authRequired, PostController.updatePost)
 
 
 

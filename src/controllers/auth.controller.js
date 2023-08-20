@@ -10,7 +10,7 @@ export class AuthController {
       const userFound = await User.findOne({ email })
       if (userFound) return res.status(400).json({ message: 'User already exists' })
       
-      const { user, token } = await AuthModel.register({ username, email, password, res })
+      const { user, token } = await AuthModel.register({ username, email, password })
       res.cookie('token', token)
       res.json(user)
     } catch (err) {

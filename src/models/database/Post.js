@@ -9,8 +9,8 @@ const postSchema = new Schema({
     required: true
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
-}, { timestamps: true })
+  tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }]
+}, { timestamps: true, versionKey: false })
 
 
 export default model('Post', postSchema)

@@ -1,6 +1,6 @@
 import User from '../models/database/User.js'
 import jwt from 'jsonwebtoken'
-import { TOKEN_SECRET } from '../config.js'
+import { TOKEN_SECRET } from '../config/config.js'
 import { AuthModel } from "../models/local-file-system/auth.js";
 
 export class AuthController {
@@ -9,7 +9,7 @@ export class AuthController {
     try {
       const userFound = await User.findOne({ email })
       if (userFound) return res.status(400).json({ message: 'User already exists' })
-      
+
       const { user, token } = await AuthModel.register({ username, email, password })
       res.cookie('token', token)
       res.json(user)

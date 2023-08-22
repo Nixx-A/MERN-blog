@@ -22,8 +22,6 @@ export class AuthModel {
 
   static async login ({ email, password }) {
     const userFound = await User.findOne({ email })
-    if (!userFound) return res.status(400).json({ message: 'User not found' })
-
     const isMatch = await bcrypt.compare(password, userFound.password)
     const token = await createAccessToken({ id: userFound._id })
 

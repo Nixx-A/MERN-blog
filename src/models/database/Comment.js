@@ -10,6 +10,6 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Post'
   }
-}, { timestamps: true })
+}, { timestamps: true, versionKey: false })
 
 export default model('Comment', commentSchema)

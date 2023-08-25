@@ -8,6 +8,7 @@ import { Navbar } from './components/Navbar'
 
 export default function App () {
   return (
+<<<<<<< HEAD
     <BrowserRouter>
 
     <main className='bg-gray-200 h-screen w-screen  overflow-x-hidden a'>
@@ -27,5 +28,8 @@ export default function App () {
     </main>
 
     </BrowserRouter>
+=======
+    <div>Appa</div>
+>>>>>>> f0b3563a72ab4ae981b486aad8b22de0c57b4d3a
   )
 }

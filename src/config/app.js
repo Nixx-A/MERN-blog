@@ -11,9 +11,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
 
-app.use('/post', postRoutes)
+app.use('/api/post', postRoutes)
 app.use('/settings', profileRoutes)
-app.use('/api', authRoutes)
+app.use('/api/auth', authRoutes)
 
 
 

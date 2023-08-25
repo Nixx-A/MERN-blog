@@ -31,7 +31,7 @@ export class AuthController {
     }
   }
 
-  static async logout (req, res) {
+  static async logout (_, res) {
     res.clearCookie('token')
     res.json({ message: 'Logged out' })
   }

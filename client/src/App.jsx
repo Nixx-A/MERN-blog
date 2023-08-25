@@ -10,7 +10,7 @@ export default function App () {
   return (
     <BrowserRouter>
 
-    <main className='bg-gray-200 h-screen w-screen  overflow-x-hidden '>
+    <main className='bg-gray-200 h-screen w-screen  overflow-x-hidden a '>
     <Navbar />
 
       <Routes>

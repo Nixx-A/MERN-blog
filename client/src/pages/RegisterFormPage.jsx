@@ -2,7 +2,9 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { Label } from '../components/ui/Label'
 import { Input } from '../components/ui/Input'
+import { useAuth } from '../context/AuthContext'
 export function RegisterForm () {
+  const { signup } = useAuth()
   const {
     register,
     handleSubmit,
@@ -12,14 +14,15 @@ export function RegisterForm () {
   const onSubmit = handleSubmit(async values => {
     try {
       console.log(values)
+      await signup(values)
     } catch (error) {
       console.log(error)
     }
   })
 
   return (
-    <div className=' bg-[#f5f5f5] flex items-center h-full justify-center'>
-      <div className='bg-white max-w-lg w-full p-10 h-auto m-auto rounded-md shadow-md'>
+    <div className=' bg-[#f5f5f5] mt-5'>
+      <div className='bg-white max-w-lg w-full py-5 px-10 h-auto m-auto rounded-md shadow-md'>
         <h2 className='font-bold text-xl'>Create your account</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4'>
@@ -28,7 +31,7 @@ export function RegisterForm () {
           <input className='file:rounded file:outline-none file:border-0 file:p-1.5 file:bg-gray-200 file:hover:bg-gray-300 duration-150 border rounded p-2' type="file" name="profile-image" {...register('profile-image')} />
 
           <Label htmlFor="username">Username</Label>
-          <Input type='text' name='username' placeholder='Write your username' {...register('username')}/>
+          <Input type='text' name='username' placeholder='Write your username' {...register('username')} />
           {errors.username && (
             <span className='text-red-500'>This field is required</span>
           )}

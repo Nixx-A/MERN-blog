@@ -1,10 +1,10 @@
 import axios from './axios'
 
-export const registerRequest = async (user) => axios.post('/api/auth/register', user)
+export const registerRequest = async (user) => axios.post('/auth/register', user)
 
-export const loginRequest = async (user) => axios.post('/api/auth/login', user)
+export const loginRequest = async (user) => axios.post('/auth/login', user)
 
-export const logoutRequest = async () => axios.post('/api/auth/logout')
+export const logoutRequest = async () => axios.post('/auth/logout')
 
 export const verifyTokenRequest = async () => axios.get('/verify')
 

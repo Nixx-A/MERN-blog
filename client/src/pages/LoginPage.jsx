@@ -2,9 +2,13 @@ import { useForm } from 'react-hook-form'
 import { Label } from '../components/ui/Label'
 import { Input } from '../components/ui/Input'
 import { Methods } from './Methods'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 export function LoginPage () {
+  const { signin } = useAuth()
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -13,7 +17,8 @@ export function LoginPage () {
 
   const onSubmit = handleSubmit(async values => {
     try {
-      console.log(values)
+      signin(values)
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
@@ -38,7 +43,7 @@ export function LoginPage () {
             <span className='text-red-500'>This field is required</span>
           )}
 
-            <button className='my-4 px-2 py-2 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 ' type='submit'>Continue</button>
+          <button className='my-4 px-2 py-2 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 ' type='submit'>Continue</button>
         </form>
 
         <Link to={'/users/password/new'} className='text-indigo-500 text-center mt-5 '>I forgot my password</Link>

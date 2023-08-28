@@ -3,14 +3,18 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import Sidebar from './Sidebar'
+import { useAuth } from '../context/AuthContext'
+import ImgSidebar from './ImgSidebar'
 
 export function Navbar () {
+  const { isAuthenticated } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+  const [imgSidebarOpen, setimgSidebarOpen] = useState(false)
 
   return (
     <>
-      <header className='bg-white h-14 shadow-sm  duration-150 border-b'>
-        <div className='w-full md:w-[97%] lg:w-[85%] m-auto flex items-center h-14'>
+      <header className='bg-white h-14 shadow-sm fixed w-full duration-150 border-b'>
+        <div className='w-full md:w-[97%] lg:w-[90%] m-auto flex items-center h-14'>
           <div className='md:hidden'>
             <GiHamburgerMenu onClick={() => setIsOpen(!isOpen)} className='cursor-pointer m-2 w-5 h-5 mb-1' />
           </div>
@@ -23,11 +27,20 @@ export function Navbar () {
             </form>
           </div>
 
-          <nav className='ml-auto flex items-center gap-x-2 md:gap-x-4'>
-            <Link to='/search' className='p-2 hover:bg-indigo-400/30 rounded md:hidden'><BiSearch className='md:hidden w-6 h-6 cursor-pointer rounded ' color='black' /></Link>
-            <Link to='/login' className='hidden md:inline hover:bg-indigo-400/30 p-2 rounded hover:text-indigo-600 hover:underline'>Log in</Link>
-            <Link to='/register' className='px-3.5 py-2 mr-2 md:mr-0 border rounded text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white hover:underline font-semibold '>Create account</Link>
-          </nav>
+          {isAuthenticated
+            ? <div className='ml-auto flex items-center gap-x-2'>
+              <Link to='/search' className='p-2 hover:bg-indigo-400/30 rounded md:hidden'><BiSearch className='md:hidden w-6 h-6 cursor-pointer rounded ' color='black' /></Link>
+              <Link to='/new' className='hidden md:block px-3.5 py-2 mr-2 md:mr-0 border rounded text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white hover:underline font-semibold '>Create Post</Link>
+              <img className='w-8 h-8 rounded-full border border-black cursor-pointer hover:border-indigo-600 mr-4' onClick={() => setimgSidebarOpen(!imgSidebarOpen)} src='../../public/nutritionist.png' />
+              {imgSidebarOpen && <ImgSidebar isOpen={imgSidebarOpen} setIsOpen={setimgSidebarOpen} />}
+            </div>
+            : <nav className='ml-auto flex items-center gap-x-2 md:gap-x-4'>
+              <Link to='/search' className='p-2 hover:bg-indigo-400/30 rounded md:hidden'><BiSearch className='md:hidden w-6 h-6 cursor-pointer rounded ' color='black' /></Link>
+              <Link to='/login' className='hidden md:inline hover:bg-indigo-400/30 p-2 rounded hover:text-indigo-600 hover:underline'>Log in</Link>
+              <Link to='/register' className='px-3.5 py-2 mr-2 md:mr-0 border rounded text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white hover:underline font-semibold '>Create account</Link>
+            </nav>
+          }
+
         </div>
       </header>
 

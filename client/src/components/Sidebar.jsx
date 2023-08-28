@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function Sidebar ({ isOpen, setIsOpen }) {
   return (
     <>
-      <aside className={`${isOpen ? 'absolute left-0 top-0' : 'absolute left-[-100%] top-0'} flex flex-col  h-screen bg-white w-3/4 duration-150 overflow-y-scroll`}>
+      <aside className={`${isOpen ? 'absolute left-0 top-0' : 'absolute left-[-100%] top-0'} flex flex-col  h-screen bg-white w-3/4 md:w-2/4 duration-150 overflow-y-scroll`}>
         <div className='flex  items-center p-2 justify-between'>
           <h2 className='font-semibold text-2xl'>Nixx</h2>
           <AiOutlineClose onClick={() => setIsOpen(!isOpen)} className='cursor-pointer m-2 w-[2.3rem] h-[2.3rem] hover:bg-indigo-400/30 rounded p-2 mb-1' />
@@ -14,7 +14,7 @@ export default function Sidebar ({ isOpen, setIsOpen }) {
         <div className='grid divide-y-2'>
           {SidebarData.map((item, index) => (
             <Link to={item.path} key={index}>
-              <div className='flex items-center p-1 hover:bg-indigo-400/30 rounded'>
+              <div onClick={() => setIsOpen(!isOpen)} className='flex items-center p-1 hover:bg-indigo-400/30 rounded'>
                 <span >{item.icon}</span>
                 <p className=' p-2 my-1'>{item.title}</p>
               </div>

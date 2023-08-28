@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Label } from '../components/ui/Label'
-import { Input } from '../components/ui/Input'
+import { Label } from '../../components/ui/Label'
+import { Input } from '../../components/ui/Input'
 import { Methods } from './Methods'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 export function LoginPage () {
   const { signin } = useAuth()
@@ -25,8 +25,8 @@ export function LoginPage () {
   })
 
   return (
-    <div className=' bg-[#f5f5f5] mt-5'>
-      <div className='bg-white max-w-lg px-10 py-5 h-auto m-auto rounded-md shadow-md'>
+    <div className='bg-[#f5f5f5] mt-5 '>
+      <div className='bg-white max-w-lg px-10 py-5 mt-28 h-auto m-auto rounded-md shadow-md'>
         <Methods />
 
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4'>

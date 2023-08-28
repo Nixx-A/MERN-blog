@@ -13,7 +13,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-  const [errors, setErrors] = useState(null)
+  const [errors, setErrors] = useState([])
   const [user, setUser] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true)
     } catch (error) {
       console.log(error)
-      setErrors(error)
+      setErrors(error.response?.data)
     }
   }
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true)
     } catch (error) {
       console.log(error)
-      setErrors(error)
+      setErrors(error.response?.data)
     }
   }
 
@@ -47,6 +47,16 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false)
     logoutRequest()
   }
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([])
+      }, 3000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [errors])
 
   useEffect(() => {
     async function checkLogin () {

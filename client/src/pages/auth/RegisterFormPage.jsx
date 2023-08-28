@@ -1,15 +1,17 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { Label } from '../components/ui/Label'
-import { Input } from '../components/ui/Input'
-import { useAuth } from '../context/AuthContext'
+import { Label } from '../../components/ui/Label'
+import { Input } from '../../components/ui/Input'
+import { useAuth } from '../../context/AuthContext'
+import { registerSchema } from '../../schemas/auth'
+
 export function RegisterForm () {
-  const { signup } = useAuth()
+  const { signup, errors: registerErrors } = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
+  } = useForm({ resolver:  })
 
   const onSubmit = handleSubmit(async values => {
     try {
@@ -21,9 +23,13 @@ export function RegisterForm () {
   })
 
   return (
-    <div className=' bg-[#f5f5f5] mt-5'>
-      <div className='bg-white max-w-lg w-full py-5 px-10 h-auto m-auto rounded-md shadow-md'>
+    <div className=' bg-[#f5f5f5] mt-5 h-full'>
+      <div className='bg-white max-w-lg w-full py-5 px-10 h-auto m-auto mt-28 rounded-md shadow-md '>
         <h2 className='font-bold text-xl'>Create your account</h2>
+
+        {registerErrors.map((error, index) => (
+          <p key={index} className='text-red-600 bg-red-100 m-1 p-1 rounded'>{error}</p>
+        ))}
 
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4'>
 
@@ -32,20 +38,20 @@ export function RegisterForm () {
 
           <Label htmlFor="username">Username</Label>
           <Input type='text' name='username' placeholder='Write your username' {...register('username')} />
-          {errors.username && (
-            <span className='text-red-500'>This field is required</span>
+          {errors.username?.message && (
+            <p className="text-red-500">{errors.username?.message}</p>
           )}
 
           <Label htmlFor="email">Email</Label>
           <Input type='email' name='email' placeholder='Write your email' {...register('email')} />
           {errors.email && (
-            <span className='text-red-500'>This field is required</span>
+            <span className='text-red-500'>{errors.email?.message}</span>
           )}
 
           <Label htmlFor="password">Password</Label>
           <Input type='password' name='password' placeholder='********' {...register('password')} />
           {errors.password && (
-            <span className='text-red-500'>This field is required</span>
+            <span className='text-red-500'>{errors.password?.message}</span>
           )}
 
           <Label htmlFor="password-confirmation">Password confirmation</Label>

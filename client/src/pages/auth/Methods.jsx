@@ -24,7 +24,7 @@ export function Methods () {
           </div>
           <p className='text-center mt-5 after:linea'>Have a password? Continue with your email address</p>
         </div >
-        : < div className='bg-white p-3 py-10 mt-10 rounded w-5/6 lg:w-4/6 m-auto' >
+        : < div className='bg-white p-3 py-10 mt-20  rounded w-5/6 lg:w-4/6 m-auto' >
           <h2 className='text-center text-3xl font-bold mt-8'>Welcome to Nixx</h2>
           <div className='flex flex-col w-5/6 m-auto md:w-4/6 items-center justify-center text-white mt-5 gap-2'>
 

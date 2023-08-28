@@ -1,22 +1,22 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
-import { LoginPage } from './pages/LoginPage'
+import { LoginPage } from './pages/auth/LoginPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { PostFormPage } from './pages/PostFormPage'
 import { Navbar } from './components/Navbar'
 import { SearchPage } from './pages/SearchPage'
-import { Methods } from './pages/Methods'
-import { RegisterForm } from './pages/RegisterFormPage'
+import { Methods } from './pages/auth/Methods'
+import { RegisterForm } from './pages/auth/RegisterFormPage'
 import { AuthProvider } from './context/AuthContext'
-import { SignoutConfirm } from './pages/SignoutConfirm'
+import { SignoutConfirm } from './pages/auth/SignoutConfirm'
 import { ProtectedRoute } from './ProtectedRoute'
 
 export default function App () {
   return (
-    <BrowserRouter>
-      <AuthProvider>
+    <AuthProvider>
+      <BrowserRouter>
 
-        <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden a '>
+        <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden'>
           <Navbar />
 
           <Routes>
@@ -34,9 +34,9 @@ export default function App () {
               <Route path='/posts/:id' element={<PostFormPage />} />
             </Route>
           </Routes>
-        </main>
 
-      </AuthProvider>
-    </BrowserRouter>
+        </main>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }

@@ -3,16 +3,16 @@ import Comment from '../models/database/Comment.js'
 import Tag from '../models/database/Tag.js';
 
 export class PostController {
-  static async getPosts(req, res) {
+  static async getPosts (req, res) {
     try {
       const posts = await Post.find()
-      .populate('author')
-      .populate('tags')
-      .lean();
-  
+        .populate('author')
+        .populate('tags')
+        .lean();
+
       if (!posts) return res.status(404).json({ message: 'Posts not found' });
 
-  
+
       for (const post of posts) {
         const tags = await Tag.find({ post: post._id }).lean();
         const comments = await Comment.find({ post: post._id }).lean();
@@ -25,7 +25,7 @@ export class PostController {
     }
   }
 
-  static async getPost(req, res) {
+  static async getPost (req, res) {
     const { id } = req.params
     try {
       const post = await Post.findById(id)
@@ -47,7 +47,7 @@ export class PostController {
     }
   }
 
-  static async createPost(req, res) {
+  static async createPost (req, res) {
     const { title, content } = req.body
     try {
       const newTask = await Post.create({ title, content, author: req.user.id })
@@ -58,7 +58,7 @@ export class PostController {
     }
   }
 
-  static async deletePost(req, res) {
+  static async deletePost (req, res) {
     const { id } = req.params
     try {
       const post = await Post.findByIdAndDelete(id)
@@ -70,7 +70,7 @@ export class PostController {
     }
   }
 
-  static async updatePost(req, res) {
+  static async updatePost (req, res) {
     const { id } = req.params
     try {
       const post = await Post.findByIdAndUpdate(id, req.body, { new: true })

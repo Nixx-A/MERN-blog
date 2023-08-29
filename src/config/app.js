@@ -18,7 +18,7 @@ app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(cookieParser())
 
-app.use('/api/post', postRoutes)
+app.use('/api/posts', postRoutes)
 app.use('/settings', profileRoutes)
 app.use('/api/auth', authRoutes)
 

@@ -12,9 +12,9 @@ router.post('/', authRequired, PostController.createPost)
 router.delete('/:id', authRequired, PostController.deletePost)
 router.put('/:id', authRequired, PostController.updatePost)
 
-router.post('/:postId/comment', authRequired, CommentModel.createComment);
-router.get('/:postId/comment', authRequired, CommentModel.getComments);
-router.delete('/:postId/comment/:commentId', authRequired, CommentModel.deleteComment);
+router.get('/:postId/comments', authRequired, CommentModel.getComments);
+router.post('/:postId/comments', authRequired, CommentModel.createComment);
+router.delete('/:postId/comments/:commentId', authRequired, CommentModel.deleteComment);
 
 router.get('/:postId/tags', authRequired, TagModel.getTags);
 router.post('/:postId/tags', authRequired, TagModel.createTag);

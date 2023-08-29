@@ -1,17 +1,21 @@
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Label } from '../../components/ui/Label'
 import { Input } from '../../components/ui/Input'
 import { useAuth } from '../../context/AuthContext'
 import { registerSchema } from '../../schemas/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { ContentContainer } from '../../components/ui/ContentContainer'
 
 export function RegisterForm () {
-  const { signup, errors: registerErrors } = useAuth()
+  const { signup, errors: registerErrors, isAuthenticated } = useAuth()
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({ resolver:  })
+  } = useForm({ resolver: zodResolver(registerSchema) })
+  const navigate = useNavigate()
 
   const onSubmit = handleSubmit(async values => {
     try {
@@ -22,9 +26,15 @@ export function RegisterForm () {
     }
   })
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
+
   return (
-    <div className=' bg-[#f5f5f5] mt-5 h-full'>
-      <div className='bg-white max-w-lg w-full py-5 px-10 h-auto m-auto mt-28 rounded-md shadow-md '>
+    <ContentContainer>
+      <div className='bg-white max-w-lg w-full py-5 px-10 h-auto m-auto rounded-md shadow-md '>
         <h2 className='font-bold text-xl'>Create your account</h2>
 
         {registerErrors.map((error, index) => (
@@ -38,7 +48,7 @@ export function RegisterForm () {
 
           <Label htmlFor="username">Username</Label>
           <Input type='text' name='username' placeholder='Write your username' {...register('username')} />
-          {errors.username?.message && (
+          {errors.username && (
             <p className="text-red-500">{errors.username?.message}</p>
           )}
 
@@ -54,10 +64,10 @@ export function RegisterForm () {
             <span className='text-red-500'>{errors.password?.message}</span>
           )}
 
-          <Label htmlFor="password-confirmation">Password confirmation</Label>
-          <Input type='password' name='password-confirmation' placeholder='********' {...register('password-confirmation')} />
-          {errors.password_confirmation && (
-            <span className='text-red-500'>This field is required</span>
+          <Label htmlFor="confirmPassword">Password confirmation</Label>
+          <Input type='password' name='confirmPassword' placeholder='********' {...register('confirmPassword')} />
+          {errors.confirmPassword && (
+            <span className='text-red-500'>{errors.confirmPassword?.message}</span>
           )}
 
           <div>
@@ -72,6 +82,6 @@ export function RegisterForm () {
           </Link>
         </p>
       </div>
-    </div>
+    </ContentContainer>
   )
 }

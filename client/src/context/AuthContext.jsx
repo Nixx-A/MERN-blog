@@ -22,11 +22,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await registerRequest(user)
       console.log(res)
-      setUser(res.data)
-      setIsAuthenticated(true)
+      if (res.status === 200) {
+        setUser(res.data)
+        setIsAuthenticated(true)
+      }
     } catch (error) {
-      console.log(error)
-      setErrors(error.response?.data)
+      console.log(error.response)
+      setErrors(error.response?.data.message)
     }
   }
 
@@ -37,8 +39,8 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data)
       setIsAuthenticated(true)
     } catch (error) {
-      console.log(error)
-      setErrors(error.response?.data)
+      console.log(error.response)
+      setErrors(error.response?.message)
     }
   }
 
@@ -76,7 +78,6 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true)
         setUser(res.data)
         setLoading(false)
-        console.log(res)
       } catch (error) {
         console.log(error)
         setIsAuthenticated(false)

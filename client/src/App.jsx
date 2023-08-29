@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { HomePage } from './pages/HomePage'
+import { Posts } from './pages/Posts'
 import { LoginPage } from './pages/auth/LoginPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { PostFormPage } from './pages/PostFormPage'
@@ -10,33 +10,37 @@ import { RegisterForm } from './pages/auth/RegisterFormPage'
 import { AuthProvider } from './context/AuthContext'
 import { SignoutConfirm } from './pages/auth/SignoutConfirm'
 import { ProtectedRoute } from './ProtectedRoute'
+import { PostsProvider } from './context/PostsContext'
 
 export default function App () {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <PostsProvider>
+      <AuthProvider>
 
-        <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden'>
-          <Navbar />
+        <BrowserRouter>
 
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<Methods />} />
-            <Route path='/register-form' element={<RegisterForm />} />
-            <Route path='/search' element={<SearchPage />} />
-            <Route path='*' element={<HomePage />} />
+          <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden'>
+            <Navbar />
 
-            <Route element={<ProtectedRoute />}>
-              <Route path='signout-confirm' element={<SignoutConfirm />} />
-              <Route path='/profile' element={<ProfilePage />} />
-              <Route path='/add-post' element={<PostFormPage />} />
-              <Route path='/posts/:id' element={<PostFormPage />} />
-            </Route>
-          </Routes>
+            <Routes>
+              <Route path='/' element={<Posts />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<Methods />} />
+              <Route path='/register-form' element={<RegisterForm />} />
+              <Route path='/search' element={<SearchPage />} />
+              <Route path='*' element={<Posts />} />
 
-        </main>
-      </BrowserRouter>
-    </AuthProvider>
+              <Route element={<ProtectedRoute />}>
+                <Route path='signout-confirm' element={<SignoutConfirm />} />
+                <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/add-post' element={<PostFormPage />} />
+                <Route path='/posts/:id' element={<PostFormPage />} />
+              </Route>
+            </Routes>
+
+          </main>
+        </BrowserRouter>
+      </AuthProvider>
+    </PostsProvider>
   )
 }

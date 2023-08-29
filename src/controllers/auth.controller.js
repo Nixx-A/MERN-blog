@@ -8,7 +8,7 @@ export class AuthController {
     const { username, email, password } = req.body
     try {
       const userFound = await User.findOne({ email })
-      if (userFound) return res.status(400).json({ message: 'User already exists' })
+      if (userFound) return res.status(400).json({ message: ['User already exists'] })
 
       const { user, token } = await AuthModel.register({ username, email, password })
       res.cookie('token', token)
@@ -22,8 +22,7 @@ export class AuthController {
     const { email, password } = req.body
     try {
       const { user, token, isMatch } = await AuthModel.login({ email, password })
-      if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' })
-
+      if (!isMatch) return res.status(400).json({ message: ['Invalid credentials'] })
       res.cookie('token', token)
       res.json(user)
     } catch (error) {
@@ -38,13 +37,13 @@ export class AuthController {
 
   static async verifyToken (req, res) {
     const { token } = req.cookies
-    if (!token) return res.status(401).json({ message: 'Unauthorized' })
+    if (!token) return res.status(401).json({ message: ['Unauthorized'] })
 
     jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
-      if (err) return res.status(401).json({ message: 'Unauthorized' })
+      if (err) return res.status(401).json({ message: ['Unauthorized'] })
 
       const userFound = await User.findById(decoded.id)
-      if (!userFound) return res.status(401).json({ message: 'Unauthorized' })
+      if (!userFound) return res.status(401).json({ message: ['Unauthorized'] })
 
       res.json({
         id: userFound._id,

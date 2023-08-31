@@ -1,16 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { ContentContainer } from '../components/ui/ContentContainer'
+import { usePosts } from '../context/PostsContext'
+import { CustomSelect } from '../components/CustomContainer'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)
+  const { tags, getTags } = usePosts()
+  const [selectedOptions, setSelectedOptions] = useState([])
 
   const { register, handleSubmit } = useForm()
 
   const onSubmit = data => {
     console.log(data)
+    console.log(selectedOptions)
   }
+
+  useEffect(() => {
+    getTags()
+  }, [])
 
   return (
     <>
@@ -37,18 +46,21 @@ export function PostFormPage () {
 
           <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600' name="title" id="title" placeholder='New post title here...' />
 
-          <ul>
-            <li>
-              <select>
-                <option value="react">React</option>
-                <option value="angular">Angular</option>
-                <option value="vue">Vue</option>
-              </select>
-            </li>
-          </ul>
+          <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
+          <button type='submit'>Create post</button>
         </form>
       </ContentContainer>
     </>
   )
 }
+
+{ /* <ul>
+            <li>
+              <select name="tags" >
+                {tags.map((tag) => (
+                  <option key={tag._id} value={tag.name}>{tag.name}</option>
+                ))}
+              </select>
+            </li>
+          </ul> */ }

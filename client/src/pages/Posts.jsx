@@ -11,7 +11,6 @@ export function Posts () {
 
   useEffect(() => {
     getPosts()
-    getTags()
   }, [])
 
   return (

@@ -13,6 +13,7 @@ export const usePosts = () => {
 
 export function PostsProvider ({ children }) {
   const [posts, setPosts] = useState([])
+  const [tags, setTags] = useState([])
 
   const getPosts = async () => {
     try {
@@ -26,13 +27,13 @@ export function PostsProvider ({ children }) {
   const getTags = async () => {
     try {
       const res = await getTagsRequest()
-      console.log(res)
+      setTags(res.data)
     } catch (error) {
       console.log(error)
     }
   }
 
-  return (<PostsContext.Provider value={{ getPosts, posts, getTags }}>
+  return (<PostsContext.Provider value={{ getPosts, posts, tags, getTags }}>
     {children}
   </PostsContext.Provider >)
 }

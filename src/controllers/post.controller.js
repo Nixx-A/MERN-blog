@@ -49,6 +49,7 @@ export class PostController {
 
   static async createPost (req, res) {
     const { title, content } = req.body
+    console.log(req.body);
     try {
       const newTask = await Post.create({ title, content, author: req.user.id })
       const savedTask = await newTask.save()

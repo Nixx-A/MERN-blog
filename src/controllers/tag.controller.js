@@ -1,11 +1,10 @@
 import Tag from "../models/database/Tag.js";
 
-export class TagModel {
+export class TagController {
   static async getTags (req, res) {
-    const { postId } = req.params;
 
     try {
-      const tags = await Tag.find({ post: postId }).lean();
+      const tags = await Tag.find({});
       res.json(tags);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -15,7 +14,7 @@ export class TagModel {
   static async createTag (req, res) {
     const { name } = req.body
     try {
-      const newTag = await Tag.create({ name, post: req.params.postId })
+      const newTag = await Tag.create({ name })
       const savedTag = await newTag.save()
 
       res.json(savedTag)

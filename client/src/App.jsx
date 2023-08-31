@@ -33,7 +33,7 @@ export default function App () {
               <Route element={<ProtectedRoute />}>
                 <Route path='signout-confirm' element={<SignoutConfirm />} />
                 <Route path='/profile' element={<ProfilePage />} />
-                <Route path='/add-post' element={<PostFormPage />} />
+                <Route path='/new' element={<PostFormPage />} />
                 <Route path='/posts/:id' element={<PostFormPage />} />
               </Route>
             </Routes>

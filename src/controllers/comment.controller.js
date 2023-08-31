@@ -1,6 +1,6 @@
 import Comment from '../models/database/Comment.js'
 
-export class CommentModel {
+export class CommentController {
   static async createComment(req, res) {
     const { text } = req.body
     try {

@@ -11,3 +11,5 @@ export const deletePostRequest = async (id) => axios.delete(`/posts/${id}`)
 export const updatePostRequest = async (id, post) => axios.patch(`/posts/${id}`, post)
 
 export const getCommentsRequest = async (postId) => axios.get(`/${postId}/comments`)
+
+export const getTagsRequest = async () => axios.get('/posts/tags')

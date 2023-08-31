@@ -1,4 +1,3 @@
-import Post from "../models/database/Post.js";
 import Tag from "../models/database/Tag.js";
 
 export class TagModel {

@@ -6,7 +6,7 @@ const tagSchema = new Schema({
     required: true,
     
   },
- // post: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  post: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 }, { versionKey: false })
 
 export default model('Tag', tagSchema)

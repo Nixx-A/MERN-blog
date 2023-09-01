@@ -3,18 +3,24 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { ContentContainer } from '../components/ui/ContentContainer'
 import { usePosts } from '../context/PostsContext'
+import { Link } from 'react-router-dom'
 import { CustomSelect } from '../components/CustomContainer'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)
-  const { tags, getTags } = usePosts()
+  const { getTags, createPost } = usePosts()
   const [selectedOptions, setSelectedOptions] = useState([])
 
   const { register, handleSubmit } = useForm()
 
-  const onSubmit = data => {
-    console.log(data)
-    console.log(selectedOptions)
+  const onSubmit = async data => {
+    try {
+      const alteredData = { ...data, tags: selectedOptions, content: 'hola' }
+      console.log(alteredData)
+      createPost(alteredData)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -29,12 +35,12 @@ export function PostFormPage () {
           <div className='flex gap-x-4 items-center'>
             <button className='indigo-hover focus:text-black focus:font-semibold text-gray-600 hover:text-indigo-700 duration-150'>Edit</button>
             <button className='indigo-hover focus:text-black focus:font-semibold text-gray-600 hover:text-indigo-700 duration-150'>Preview</button>
-            <AiOutlineClose onClick={() => setisModalOpen(!isModalOpen)} className='relative bottom-1 indigo-hover w-auto h-auto font-semibold' />
+            <Link to='/'><AiOutlineClose onClick={() => setisModalOpen(!isModalOpen)} className='relative bottom-1 indigo-hover w-auto h-auto font-semibold' /></Link>
           </div>
         </div>
       </div>
 
-      <ContentContainer styles={'pl-4 bg-white w-screen h-screen pt-[80px] mt-0 '}>
+      <ContentContainer styles={'pl-4 bg-white w-[98%]  h-full rounded-md shadow pt-[80px] mt-0 '}>
         <form className='flex flex-col gap-y-5' onSubmit={handleSubmit(onSubmit)}>
 
           <div>
@@ -44,7 +50,7 @@ export function PostFormPage () {
             </label>
           </div>
 
-          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600' name="title" id="title" placeholder='New post title here...' />
+          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600' name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
@@ -54,13 +60,3 @@ export function PostFormPage () {
     </>
   )
 }
-
-{ /* <ul>
-            <li>
-              <select name="tags" >
-                {tags.map((tag) => (
-                  <option key={tag._id} value={tag.name}>{tag.name}</option>
-                ))}
-              </select>
-            </li>
-          </ul> */ }

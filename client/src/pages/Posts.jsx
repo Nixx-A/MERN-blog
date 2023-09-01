@@ -9,6 +9,7 @@ export function Posts () {
   const { posts, getPosts, getTags } = usePosts()
   const location = useLocation()
 
+  console.log(posts)
   useEffect(() => {
     getPosts()
   }, [])

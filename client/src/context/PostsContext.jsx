@@ -24,6 +24,14 @@ export function PostsProvider ({ children }) {
     }
   }
 
+  const createPost = async (post) => {
+    try {
+      await createPostRequest(post)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const getTags = async () => {
     try {
       const res = await getTagsRequest()
@@ -33,7 +41,7 @@ export function PostsProvider ({ children }) {
     }
   }
 
-  return (<PostsContext.Provider value={{ getPosts, posts, tags, getTags }}>
+  return (<PostsContext.Provider value={{ getPosts, posts, createPost, tags, getTags }}>
     {children}
   </PostsContext.Provider >)
 }

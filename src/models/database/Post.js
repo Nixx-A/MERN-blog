@@ -16,9 +16,7 @@
         required: true
       },
       comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-      tags: [{ type: Schema.Types.ObjectId, ref: 'Tag', validator: function (tags) {
-        return tags.length <= 4
-      }, MessageChannel: 'You can add up to 4 tags' }]
+      tags: [{ type: Schema.Types.ObjectId, ref: 'Tag'}]
     },
     { timestamps: true, versionKey: false }
   )

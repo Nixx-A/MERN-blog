@@ -8,7 +8,6 @@ import remarkGfm from 'remark-gfm'
 export default function PostCard ({ post }) {
   const readingTime = calculateReadingTime(post.content)
 
-  console.log(post)
   return (
     <div className='bg-white mb-4 rounded p-4 w-[95%]'>
       <div className='flex'>

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest } from '../api/posts'
+import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest, getPostsByTagRequest } from '../api/posts'
 
 const PostsContext = createContext()
 
@@ -13,6 +13,7 @@ export const usePosts = () => {
 
 export function PostsProvider ({ children }) {
   const [posts, setPosts] = useState([])
+  const [tags, setTags] = useState([])
 
   const getPosts = async () => {
     try {
@@ -23,16 +24,42 @@ export function PostsProvider ({ children }) {
     }
   }
 
-  const getTags = async () => {
+  const createPost = async (post) => {
     try {
-      const res = await getTagsRequest()
-      console.log(res)
+      await createPostRequest(post)
     } catch (error) {
       console.log(error)
     }
   }
 
-  return (<PostsContext.Provider value={{ getPosts, posts, getTags }}>
+  const getTags = async () => {
+    try {
+      const res = await getTagsRequest()
+      setTags(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getPostsByTag = async (tagId) => {
+    try {
+      const res = await getPostsByTagRequest(tagId)
+      setPosts(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getPost = async (postId) => {
+    try {
+      const res = await getPostRequest(postId)
+      return res.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags }}>
     {children}
   </PostsContext.Provider >)
 }

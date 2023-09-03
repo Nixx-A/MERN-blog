@@ -2,20 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-linea::after {
-  border: 1px solid black;
-  content: '';
-  display: block;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  border-radius: 50%;
-}
+/* ... other styles ... */
 
 .social-media {
   @apply h-[20px] w-[20px] text-gray-500 hover:text-gray-700 hover:scale-105 transform transition-transform duration-300;
 }
 
 .indigo-hover {
-  @apply p-2 hover:bg-indigo-400/30 rounded
+  @apply p-2 hover:bg-indigo-400/30 rounded;
+}
+
+.indigo-btn {
+  @apply my-4 px-2 py-2 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 transition-colors;
+}
+
+.accordion-flex {
+  margin-top: 25px;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  align-items: center;
+  justify-content: start;
+  
+}
+
+.answer-divider {
+  border-top: 1px solid lightgray;
+}
+
+.answer {
+  font-size: 14px;
+  margin-top: 4px;
+  margin-left: 8px;
+  margin-right: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  text-align: left;
+}
+
+.question-icon {
+  background: none;
+  border: none;
+  color: #1d1da4;
+  cursor: pointer;
+  font-size: 22px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.rotate {
+  transform: rotate(45deg);
 }

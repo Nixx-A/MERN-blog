@@ -46,7 +46,7 @@ export function LoginPage () {
             <span className='text-red-500'>{errors.password.message}</span>
           )}
 
-          <button className='my-4 px-2 py-2 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 ' type='submit'>Continue</button>
+          <button className='indigo-btn' type='submit'>Continue</button>
         </form>
 
         <Link to={'/users/password/new'} className='text-indigo-500 text-center mt-5 '>I forgot my password</Link>

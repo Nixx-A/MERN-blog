@@ -11,6 +11,9 @@ import { AuthProvider } from './context/AuthContext'
 import { SignoutConfirm } from './pages/auth/SignoutConfirm'
 import { ProtectedRoute } from './ProtectedRoute'
 import { PostsProvider } from './context/PostsContext'
+import { TagPostsPage } from './pages/TagPostsPage'
+import { TagsPage } from './pages/TagsPage'
+import { Faq } from './pages/Faq'
 
 export default function App () {
   return (
@@ -28,6 +31,9 @@ export default function App () {
               <Route path='/register' element={<Methods />} />
               <Route path='/register-form' element={<RegisterForm />} />
               <Route path='/search' element={<SearchPage />} />
+              <Route path='/tags' element={<TagsPage />} />
+              <Route path='/faq' element={<Faq />} />
+              <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
               <Route path='*' element={<Posts />} />
 
               <Route element={<ProtectedRoute />}>

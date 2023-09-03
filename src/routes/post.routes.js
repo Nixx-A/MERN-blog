@@ -6,6 +6,7 @@ import { TagController } from "../controllers/tag.controller.js";
 
 const router = Router()
 
+router.get('/tags', authRequired, TagController.getTags);
 router.get('/', PostController.getPosts)
 router.get('/:id', PostController.getPost)
 router.post('/', authRequired, PostController.createPost)
@@ -16,8 +17,9 @@ router.get('/:postId/comments', authRequired, CommentController.getComments);
 router.post('/:postId/comments', authRequired, CommentController.createComment);
 router.delete('/:postId/comments/:commentId', authRequired, CommentController.deleteComment);
 
-router.get('/:postId/tags', authRequired, TagController.getTags);
-router.post('/:postId/tags', authRequired, TagController.createTag);
+
+router.get('/tag/:tagId', authRequired, TagController.getPostsByTag);
+router.post('/tags', authRequired, TagController.createTag);
 router.delete('/:postId/tags/:tagId', authRequired, TagController.deleteTag);
 
 

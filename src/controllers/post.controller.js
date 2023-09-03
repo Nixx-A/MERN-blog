@@ -7,23 +7,24 @@ export class PostController {
     try {
       const posts = await Post.find()
         .populate('author')
-        .populate('tags')
         .lean();
 
       if (!posts) return res.status(404).json({ message: 'Posts not found' });
 
-
       for (const post of posts) {
-        const tags = await Tag.find({ post: post._id }).lean();
         const comments = await Comment.find({ post: post._id }).lean();
         post.comments = comments;
-        post.tags = tags
+
+        const tags = await Tag.find({ _id: { $in: post.tags } }).lean();
+        console.log(tags);
+        post.tags = tags;
       }
       res.json(posts);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
+
 
   static async getPost (req, res) {
     const { id } = req.params
@@ -35,7 +36,7 @@ export class PostController {
 
       if (!post) return res.status(404).json({ message: 'Post not found' })
 
-      const tags = await Tag.find({ post: post._id }).lean()
+      const tags = await Tag.find({ _id: post.tags }).lean()
       post.tags = tags
 
       const comments = await Comment.find({ post: post._id }).lean()
@@ -48,15 +49,39 @@ export class PostController {
   }
 
   static async createPost (req, res) {
-    const { title, content } = req.body
+    const { title, content, tags } = req.body;
+
     try {
-      const newTask = await Post.create({ title, content, author: req.user.id })
-      const savedTask = await newTask.save()
-      res.json(savedTask)
+      const newPost = await Post.create({
+        title,
+        content,
+        author: req.user.id,
+      });
+
+      // Create or update tags for the post
+      const tagObjects = [];
+      for (const tagName of tags) {
+        let tag = await Tag.findOne({ name: tagName });
+
+        if (!tag) {
+          tag = await Tag.create({ name: tagName });
+        }
+
+        tagObjects.push(tag._id); // Push the tag's ObjectId to the array
+      }
+
+      newPost.tags = tagObjects; // Attach tag ObjectId(s) to the post
+      console.log(newPost);
+      const savedPost = await newPost.save();
+
+      res.json(savedPost);
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error.message });
     }
   }
+
+
+
 
   static async deletePost (req, res) {
     const { id } = req.params

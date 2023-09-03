@@ -6,7 +6,27 @@ export class TagController {
 
     try {
       const tags = await Tag.find().lean();
-      res.json(tags);
+
+      // Create an array to store the tags with post IDs
+      const tagsWithPostIds = [];
+  
+      // Iterate through the tags
+      for (const tag of tags) {
+        // Find posts associated with the current tag
+        const posts = await Post.find({ tags: tag._id }).lean();
+  
+        // Extract and store the post IDs
+        const postIds = posts.map((post) => post._id);
+  
+        // Add a new property 'postIds' to the tag object
+        const tagWithPostIds = { ...tag, postIds };
+  
+        // Add the tag with post IDs to the array
+        tagsWithPostIds.push(tagWithPostIds);
+      }
+  
+      // Respond with the tags including post IDs
+      res.json(tagsWithPostIds);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -18,10 +38,10 @@ export class TagController {
       const tag = await Tag.findById(tagId);
       if (!tag) return res.status(404).json({ message: 'Tag not found' });
 
-      const postIds = tag.post
+      const posts = await Post.find({ tags: tagId }).lean().populate('tags')
 
-      // Find the posts by their ObjectIds
-      const posts = await Post.find({ tags: tagId }).lean();
+      const postIds = posts.map((post) => post._id);
+      
 
       res.json(posts);
     } catch (error) {

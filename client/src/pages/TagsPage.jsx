@@ -9,6 +9,7 @@ export function TagsPage () {
   useEffect(() => {
     getTags()
   }, [])
+
   return (
     <ContentContainer>
       <div className=' w-[80%] m-auto'>

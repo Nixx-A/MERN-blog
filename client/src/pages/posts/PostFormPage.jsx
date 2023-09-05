@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
-import { ContentContainer } from '../components/ui/ContentContainer'
-import { usePosts } from '../context/PostsContext'
+import { ContentContainer } from '../../components/ui/ContentContainer'
+import { usePosts } from '../../context/PostsContext'
 import { Link } from 'react-router-dom'
-import { CustomSelect } from '../components/CustomContainer'
+import { CustomSelect } from '../../components/ui/CustomContainer'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)

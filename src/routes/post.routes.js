@@ -18,7 +18,7 @@ router.post('/:postId/comments', authRequired, CommentController.createComment);
 router.delete('/:postId/comments/:commentId', authRequired, CommentController.deleteComment);
 
 
-router.get('/tag/:tagId', authRequired, TagController.getPostsByTag);
+router.get('/tag/:tagId', TagController.getPostsByTag);
 router.post('/tags', authRequired, TagController.createTag);
 router.delete('/:postId/tags/:tagId', authRequired, TagController.deleteTag);
 

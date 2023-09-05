@@ -53,6 +53,7 @@ export function PostsProvider ({ children }) {
   const getPost = async (postId) => {
     try {
       const res = await getPostRequest(postId)
+      console.log(res.data)
       return res.data
     } catch (error) {
       console.log(error)

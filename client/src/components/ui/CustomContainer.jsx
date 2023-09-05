@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { usePosts } from '../context/PostsContext'
+import { usePosts } from '../../context/PostsContext'
 
 export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
   const { tags } = usePosts()
@@ -60,8 +60,8 @@ export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
                 key={tag._id}
                 onClick={() => handleOptionClick(tag._id, tag.name)}
                 className={`block px-4 py-2 text-sm cursor-pointer ${selectedOptions.includes(tag.name)
-                    ? 'bg-indigo-200 text-blue-800'
-                    : ''
+                  ? 'bg-indigo-200 text-blue-800'
+                  : ''
                   }`}
                 role="menuitem"
               >

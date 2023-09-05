@@ -1,15 +1,14 @@
 import { useEffect } from 'react'
-import { usePosts } from '../context/PostsContext'
+import { usePosts } from '../../context/PostsContext'
 import { useLocation } from 'react-router-dom'
-import { ContentContainer } from '../components/ui/ContentContainer'
-import PostsNavigation from '../components/PostsNavigation'
-import PostCard from '../components/posts/PostCard'
+import { ContentContainer } from '../../components/ui/ContentContainer'
+import PostsNavigation from '../../components/PostsNavigation'
+import PostCard from '../../components/posts/PostCard'
 
 export function Posts () {
   const { posts, getPosts } = usePosts()
   const location = useLocation()
 
-  console.log(posts)
   useEffect(() => {
     getPosts()
   }, [])

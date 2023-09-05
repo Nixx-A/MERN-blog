@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { AiFillGithub, AiFillInstagram, AiOutlineClose, AiOutlineTwitter } from 'react-icons/ai'
-import { SidebarData } from './SidebarData'
+import { SidebarData } from '../data/SidebarData'
 import { Link } from 'react-router-dom'
 
 export default function Sidebar ({ isOpen, setIsOpen }) {

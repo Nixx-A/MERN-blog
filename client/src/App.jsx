@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Posts } from './pages/Posts'
+import { Posts } from './pages/posts/Posts'
 import { LoginPage } from './pages/auth/LoginPage'
 import { ProfilePage } from './pages/ProfilePage'
-import { PostFormPage } from './pages/PostFormPage'
+import { PostFormPage } from './pages/posts/PostFormPage'
 import { Navbar } from './components/Navbar'
 import { SearchPage } from './pages/SearchPage'
 import { Methods } from './pages/auth/Methods'
@@ -14,6 +14,7 @@ import { PostsProvider } from './context/PostsContext'
 import { TagPostsPage } from './pages/TagPostsPage'
 import { TagsPage } from './pages/TagsPage'
 import { Faq } from './pages/Faq'
+import { Post } from './pages/posts/Post'
 
 export default function App () {
   return (
@@ -35,6 +36,7 @@ export default function App () {
               <Route path='/faq' element={<Faq />} />
               <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
               <Route path='*' element={<Posts />} />
+              <Route path='/post/:postId' element={<Post />} />
 
               <Route element={<ProtectedRoute />}>
                 <Route path='signout-confirm' element={<SignoutConfirm />} />

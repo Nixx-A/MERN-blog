@@ -10,7 +10,9 @@ const profileSchema = new Schema({
     github: String,
     youtube: String,
   },
-  avatar: String
+  avatar: String,
+  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 })
 
 export default model('Profile', profileSchema)

@@ -5,6 +5,7 @@ import { ContentContainer } from '../../components/ui/ContentContainer'
 import { usePosts } from '../../context/PostsContext'
 import { Link } from 'react-router-dom'
 import { CustomSelect } from '../../components/ui/CustomContainer'
+import MarkdownToolbarElement from '@github/markdown-toolbar-element'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)
@@ -15,9 +16,9 @@ export function PostFormPage () {
 
   const onSubmit = async data => {
     try {
-      const alteredData = { ...data, tags: selectedOptions, content: 'hola' }
+      const alteredData = { ...data, tags: selectedOptions }
       console.log(alteredData)
-      createPost(alteredData)
+      // createPost(alteredData)
     } catch (error) {
       console.log(error)
     }
@@ -53,6 +54,8 @@ export function PostFormPage () {
           <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600' name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
+
+          <textarea name="content" id="content" placeholder='Write your post content here...' {...register('content')}></textarea>
 
           <button type='submit'>Create post</button>
         </form>

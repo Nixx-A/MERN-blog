@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { AiOutlineLike } from 'react-icons/ai'
 import { calculateReadingTime } from '../../utils/postRead'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { formatPostDate } from '../../utils/dateUtils'
 
 export default function PostCard ({ post }) {
@@ -30,13 +28,11 @@ export default function PostCard ({ post }) {
 
         <div className='text-xl font-semibold mb-2 inline-block hover:text-indigo-700'>{post.title}</div>
 
-        <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none' remarkPlugins={[remarkGfm]} >{post.content}</ReactMarkdown>
-
         <div>
           <p>
             {post.tags.map(tag => (
               <Link
-                className='hover:text-black text-gray-800 hover:bg-gray-100 border-none px-1.5 py-0.5 hover:border rounded'
+                className='hover:text-black text-gray-800  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
                 to={`/tag/${tag._id}/${tag.name}`}
                 key={tag.name}>
                 #{tag.name}

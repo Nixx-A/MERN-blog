@@ -26,6 +26,7 @@ export function PostsProvider ({ children }) {
 
   const createPost = async (post) => {
     try {
+      console.log(post)
       await createPostRequest(post)
     } catch (error) {
       console.log(error)

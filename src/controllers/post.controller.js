@@ -63,9 +63,7 @@ export class PostController {
       for (const tagName of tags) {
         let tag = await Tag.findOne({ name: tagName });
 
-        if (!tag) {
-          tag = await Tag.create({ name: tagName });
-        }
+        if (!tag) res.status(404).json({ message: 'Tag not found' });
 
         tagObjects.push(tag._id); // Push the tag's ObjectId to the array
       }

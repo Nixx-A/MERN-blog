@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { AiFillGithub, AiFillInstagram, AiOutlineClose, AiOutlineTwitter } from 'react-icons/ai'
-import { SidebarData } from '../data/SidebarData'
+import { sidebarData } from '../data/SidebarData'
+
 import { Link } from 'react-router-dom'
 
 export default function Sidebar ({ isOpen, setIsOpen }) {
@@ -13,7 +14,7 @@ export default function Sidebar ({ isOpen, setIsOpen }) {
         </div>
 
         <div className='grid divide-y-2'>
-          {SidebarData.map((item, index) => (
+          {sidebarData.map((item, index) => (
             <Link to={item.path} key={index}>
               <div onClick={() => setIsOpen(!isOpen)} className='flex items-center p-1 hover:bg-indigo-400/30 rounded'>
                 <span >{item.icon}</span>

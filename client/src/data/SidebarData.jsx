@@ -5,7 +5,7 @@ import { FcAbout } from 'react-icons/fc'
 
 const iconStyles = 'w-6 h-6'
 
-export const SidebarData = [
+export const sidebarData = [
   {
     title: 'Home',
     path: '/',

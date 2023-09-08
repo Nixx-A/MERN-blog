@@ -13,7 +13,7 @@ export function Navbar () {
 
   return (
     <>
-      <header className='bg-white h-14 shadow-sm fixed w-full duration-150 border-b'>
+      <header className='bg-white h-14 shadow-sm fixed w-full duration-150 border-b z-10'>
         <div className='w-full md:w-[97%] lg:w-[90%] m-auto flex items-center h-14'>
           <div className='md:hidden'>
             <GiHamburgerMenu onClick={() => setIsOpen(!isOpen)} className='cursor-pointer m-2 w-5 h-5 mb-1' />

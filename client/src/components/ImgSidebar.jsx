@@ -6,7 +6,7 @@ export default function ImgSidebar ({ setIsOpen }) {
   const { user } = useAuth()
   console.log(user)
   return (
-    <>
+    <div className=''>
       <ul
         className={
           'absolute top-16 w-[95%] m-auto right-0 left-0 shadow-md md:right-8  h-auto md:w-auto md:left-[70%] lg:left-[80%] break-before-avoid-page  bg-white rounded-md p-4'
@@ -43,6 +43,6 @@ export default function ImgSidebar ({ setIsOpen }) {
           </Link>
         </li>
       </ul>
-    </>
+    </div>
   )
 }

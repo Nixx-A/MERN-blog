@@ -16,6 +16,7 @@ import { TagsPage } from './pages/TagsPage'
 import { Faq } from './pages/Faq'
 import { Post } from './pages/posts/Post'
 import { About } from './pages/About'
+import { Podcasts } from './pages/Podcasts'
 
 export default function App () {
   return (
@@ -36,6 +37,7 @@ export default function App () {
               <Route path='/tags' element={<TagsPage />} />
               <Route path='/faq' element={<Faq />} />
               <Route path='/about' element={<About />} />
+              <Route path='/podcasts' element={<Podcasts />} />
               <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
               <Route path='*' element={<Posts />} />
               <Route path='/post/:postId' element={<Post />} />

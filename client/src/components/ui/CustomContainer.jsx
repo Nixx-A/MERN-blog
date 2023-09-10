@@ -4,7 +4,6 @@ import { usePosts } from '../../context/PostsContext'
 export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
   const { tags } = usePosts()
 
-  console.log(tags)
   const [isOpen, setIsOpen] = useState(false)
 
   const maxSelections = 4

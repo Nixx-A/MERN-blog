@@ -3,9 +3,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 import { usePosts } from '../../context/PostsContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { CustomSelect } from '../../components/ui/CustomContainer'
-import MarkdownToolbarElement from '@github/markdown-toolbar-element'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)
@@ -13,12 +12,15 @@ export function PostFormPage () {
   const [selectedOptions, setSelectedOptions] = useState([])
 
   const { register, handleSubmit } = useForm()
+  const navigate = useNavigate()
+  // const iconsStyle = 'w-10 h-10 hover:bg-indigo-400/30  hover:text-indigo-700 p-2 rounded cursor-pointer'
 
   const onSubmit = async data => {
     try {
       const alteredData = { ...data, tags: selectedOptions }
       console.log(alteredData)
-      // createPost(alteredData)
+      createPost(alteredData)
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
@@ -63,3 +65,16 @@ export function PostFormPage () {
     </>
   )
 }
+
+// eslint-disable-next-line no-lone-blocks
+{ /*   <div className='flex items-center gap-x-3 bg-gray-100/70 -ml-4'>  next update :) because idk how to do it now and i'm a little tired of this project, i'm working on it about 3 weeks, so i want to finish it as soon as possible
+  <markdown-toolbar for="content">
+    <md-bold><AiOutlineBold className={`${iconsStyle} ml-2`} /></md-bold>
+    <md-italic><AiOutlineItalic className={iconsStyle} /></md-italic>
+    <md-code><AiOutlineCode className={iconsStyle} /></md-code>
+    <md-link><AiOutlineLink className={iconsStyle} /></md-link>
+    <md-image><BiSolidImage className={iconsStyle} /></md-image>
+    <md-unordered-list><AiOutlineUnorderedList className={iconsStyle} /></md-unordered-list>
+    <md-ordered-list><AiOutlineOrderedList className={iconsStyle} /></md-ordered-list>
+  </markdown-toolbar>
+</div> */ }

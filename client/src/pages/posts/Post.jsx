@@ -6,6 +6,7 @@ import { AiOutlineLike } from 'react-icons/ai'
 import { formatPostDate } from '../../utils/dateUtils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { markdownStyles } from '../../data/markdownStyles'
 
 export function Post () {
   const [post, setPost] = useState(null)
@@ -17,7 +18,6 @@ export function Post () {
   useEffect(() => {
     getPost(postId).then(fetchedPost => {
       setPost(fetchedPost)
-      console.log(fetchedPost)
     })
   }, [postId, getPost])
 
@@ -27,28 +27,30 @@ export function Post () {
       <div className='w-[98%] m-auto '>
         {post && (
           <>
-            <div className='flex'>
+            <div className='flex gap-x-2 mb-4'>
               <img src="/no-user-image-icon-3.jpg" alt="user" className='w-10 h-10 rounded-full' />
-              <div className='flex flex-col'>
-                <p className=''>{post.author.username}</p>
-                <p>{formattedData}</p>
+              <div className=' flex flex-col'>
+                <p className='font-semibold'>{post.author.username}</p>
+                <small className=''>{formattedData}</small>
               </div>
             </div>
-            <div className='w-full relative left-5'>
-              <AiOutlineLike />
+            <div className='w-full left-5 '>
+              <AiOutlineLike className='' />
             </div>
 
-            <h2 className='font-bold text-3xl mb-2'>{post.title}</h2>
-            {post.tags.map(tag => (
-              <Link
-                className='hover:text-black text-gray-800  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
-                to={`/tag/${tag._id}/${tag.name}`}
-                key={tag.name}>
-                #{tag.name}
-              </Link>
-            ))}
+            <div className='mb-8'>
+              <h2 className='font-bold text-4xl mb-2'>{post.title}</h2>
+              {post.tags.map(tag => (
+                <Link
+                  className='hover:text-black text-gray-800 mb-4  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
+                  to={`/tag/${tag._id}/${tag.name}`}
+                  key={tag.name}>
+                  #{tag.name}
+                </Link>
+              ))}
+            </div>
 
-            <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none' remarkPlugins={[remarkGfm]} >{post.content}</ReactMarkdown>
+            <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
           </>
         )}
       </div>

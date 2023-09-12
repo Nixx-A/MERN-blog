@@ -20,7 +20,7 @@ export function Navbar () {
           </div>
 
           <div className='flex gap-x-2 items-end md:w-[500px]'>
-            <Link to='/'><h1 className='text-2xl font-semibold'>Nixx</h1></Link>
+            <Link to='/'><img src='/settings-87x87px.png' className='w-[35px] h-[35px]' /></Link>
             <form className='hidden md:flex items-center justify-center w-full'>
               <input type="text" autoComplete='false' className=' w-full border py-1.5 px-2  border-gray-300  rounded-md focus:border-gray-600 outline-none placeholder:text-gray-700' placeholder='Search...' />
               <button className='w-6 h-6'><BiSearch className='relative right-[calc(100%-(-8px))] w-6 h-6' /></button>

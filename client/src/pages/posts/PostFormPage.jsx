@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 import { usePosts } from '../../context/PostsContext'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CustomSelect } from '../../components/ui/CustomContainer'
 
 export function PostFormPage () {
@@ -53,13 +53,15 @@ export function PostFormPage () {
             </label>
           </div>
 
-          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600' name="title" id="title" placeholder='New post title here...' {...register('title')} />
+          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
           <textarea name="content" id="content" placeholder='Write your post content here...' {...register('content')}></textarea>
 
-          <button type='submit'>Create post</button>
+          <div>
+            <button className='text-start bg-[#2f3ab2] text-white hover:bg-blue-900 duration-100 px-2 py-1 rounded' type='submit'>Publish</button>
+          </div>
         </form>
       </ContentContainer>
     </>

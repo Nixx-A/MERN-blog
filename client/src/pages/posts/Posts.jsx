@@ -7,9 +7,15 @@ import { PostCardLoading } from '../../components/PostLoadingSkeleton'
 import { useEffect } from 'react'
 
 export function Posts () {
-  const { posts, getPosts, loading } = usePosts()
+  const { posts, getPosts, loading, setLoading } = usePosts()
   const location = useLocation()
 
+  useEffect(() => {
+    getPosts()
+    setLoading(true)
+  }, [])
+
+  console.log(loading)
   if (loading) {
     return (
       <div className='mt-[110px]'>
@@ -20,10 +26,6 @@ export function Posts () {
       </div>
     )
   }
-
-  useEffect(() => {
-    getPosts()
-  }, [location.pathname === '/'])
 
   return (
     < ContentContainer >

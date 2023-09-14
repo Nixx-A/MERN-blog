@@ -14,19 +14,18 @@ export const usePosts = () => {
 export function PostsProvider ({ children }) {
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(true)
 
   const getPosts = async () => {
     try {
       const res = await getPostsRequest()
-      console.log(loading)
       setPosts(res.data)
-      console.log(loading)
+      setloading(false)
     } catch (error) {
       console.log(error)
-    } finally {
     }
   }
+  // idk why the loading is not working for the skeleton component
 
   const createPost = async (post) => {
     try {
@@ -66,6 +65,7 @@ export function PostsProvider ({ children }) {
 
   useEffect(() => {
     getPosts()
+    setloading(true)
   }, [])
 
   return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags, loading }}>

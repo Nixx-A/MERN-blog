@@ -3,16 +3,10 @@ import { FaRegCommentDots } from 'react-icons/fa'
 import { AiOutlineLike } from 'react-icons/ai'
 import { calculateReadingTime } from '../../utils/postRead'
 import { formatPostDate } from '../../utils/dateUtils'
-import { usePosts } from '../../context/PostsContext'
-import { PostCardLoading } from '../PostLoadingSkeleton'
 
 export default function PostCard ({ post }) {
-  const { loading } = usePosts()
-
   const readingTime = calculateReadingTime(post.content)
   const formattedDate = formatPostDate(post.createdAt)
-
-  if (loading) return <PostCardLoading />
 
   return (
     <div className='bg-white mb-4 rounded p-4 w-[95%]'>

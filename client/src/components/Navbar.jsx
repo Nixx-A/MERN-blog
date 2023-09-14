@@ -15,8 +15,8 @@ export function Navbar () {
     <>
       <header className='bg-white h-14 shadow-sm fixed w-full duration-150 border-b z-10'>
         <div className='w-full md:w-[97%] lg:w-[90%] m-auto flex items-center h-14'>
-          <div className='md:hidden'>
-            <GiHamburgerMenu onClick={() => setIsOpen(!isOpen)} className='cursor-pointer m-2 w-5 h-5 mb-1' />
+          <div onClick={() => setIsOpen(!isOpen)} className='md:hidden hover:bg-indigo-400/30 rounded mx-1 py-1  hover:text-indigo-700'>
+            <GiHamburgerMenu className='cursor-pointer m-2 w-5 h-5 mb-1' />
           </div>
 
           <div className='flex gap-x-2 items-end md:w-[500px]'>

@@ -14,7 +14,7 @@ export function TagsPage () {
     <ContentContainer>
       <div className=' w-[80%] m-auto'>
         <h1 className='text-3xl font-bold'>Tags</h1>
-        <div className='grid gap-4 mt-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-1'>
+        <div className='grid gap-4 mt-4  md:grid-cols-3 lg:grid-cols-1'>
 
           {tags.map((tag) => (
             <TagCard tag={tag} key={tag._id} />

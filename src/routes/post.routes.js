@@ -8,8 +8,8 @@ import { validateSchema } from '../middlewares/validator.js';
 
 const router = Router()
 
-router.get('/tags', authRequired, TagController.getTags);
 router.get('/', PostController.getPosts)
+router.get('/tags', TagController.getTags);
 router.get('/:id', PostController.getPost)
 router.post('/', validateSchema(createPostSchema), authRequired, PostController.createPost)
 router.delete('/:id', authRequired, PostController.deletePost)

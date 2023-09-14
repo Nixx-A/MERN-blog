@@ -9,15 +9,11 @@ export function Posts () {
   const { posts, getPosts } = usePosts()
   const location = useLocation()
 
-  useEffect(() => {
-    getPosts()
-  }, [])
 
   return (
     <ContentContainer>
       <div>
         <PostsNavigation />
-        {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}
 
         {
           location.pathname === '/' &&
@@ -31,3 +27,5 @@ export function Posts () {
     </ContentContainer>
   )
 }
+
+// {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}

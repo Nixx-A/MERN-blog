@@ -15,12 +15,12 @@ export function Navbar () {
     <>
       <header className='bg-white h-14 shadow-sm fixed w-full duration-150 border-b z-10'>
         <div className='w-full md:w-[97%] lg:w-[90%] m-auto flex items-center h-14'>
-          <div className='md:hidden'>
-            <GiHamburgerMenu onClick={() => setIsOpen(!isOpen)} className='cursor-pointer m-2 w-5 h-5 mb-1' />
+          <div onClick={() => setIsOpen(!isOpen)} className='md:hidden hover:bg-indigo-400/30 rounded mx-1 py-1  hover:text-indigo-700'>
+            <GiHamburgerMenu className='cursor-pointer m-2 w-5 h-5 mb-1' />
           </div>
 
           <div className='flex gap-x-2 items-end md:w-[500px]'>
-            <Link to='/'><h1 className='text-2xl font-semibold'>Nixx</h1></Link>
+            <Link to='/'><img src='/settings-87x87px.png' className='w-[35px] h-[35px]' /></Link>
             <form className='hidden md:flex items-center justify-center w-full'>
               <input type="text" autoComplete='false' className=' w-full border py-1.5 px-2  border-gray-300  rounded-md focus:border-gray-600 outline-none placeholder:text-gray-700' placeholder='Search...' />
               <button className='w-6 h-6'><BiSearch className='relative right-[calc(100%-(-8px))] w-6 h-6' /></button>

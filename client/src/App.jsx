@@ -39,6 +39,7 @@ export default function App () {
               <Route path='/about' element={<About />} />
               <Route path='/podcasts' element={<Podcasts />} />
               <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
+              <Route path='*' element={<Posts />} />
               <Route path='/post/:postId' element={<Post />} />
 
               <Route element={<ProtectedRoute />}>

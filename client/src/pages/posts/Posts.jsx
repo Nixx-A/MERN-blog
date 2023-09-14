@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
 import { usePosts } from '../../context/PostsContext'
 import { useLocation } from 'react-router-dom'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 import PostsNavigation from '../../components/PostsNavigation'
 import PostCard from '../../components/posts/PostCard'
 import { PostCardLoading } from '../../components/PostLoadingSkeleton'
+import { useEffect } from 'react'
 
 export function Posts () {
   const { posts, getPosts, loading } = usePosts()
@@ -21,8 +21,13 @@ export function Posts () {
     )
   }
 
+  useEffect(() => {
+    getPosts()
+  }, [location.pathname === '/'])
+
   return (
-    <ContentContainer>
+    < ContentContainer >
+      {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}
       <div>
         <PostsNavigation />
 
@@ -35,8 +40,6 @@ export function Posts () {
         {location.pathname === '/latest' && <p>Latest</p>}
         {location.pathname === '/top-week' && <p>Top</p>}
       </div>
-    </ContentContainer>
+    </ContentContainer >
   )
 }
-
-// {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}

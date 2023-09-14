@@ -1,5 +1,4 @@
 import ContentLoader from 'react-content-loader'
-import { ContentContainer } from './ui/ContentContainer'
 
 export function PostCardLoading () {
   return (

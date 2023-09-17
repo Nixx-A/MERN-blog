@@ -10,14 +10,14 @@ export function TagPostsPage () {
 
   useEffect(() => {
     getPostsByTag(tagId)
-  }, [tagId])
+  }, [tagId, tagName])
 
   return (
     <ContentContainer>
-      <h1 className='text-center text-2xl font-semibold'>{tagName}</h1>
-    {posts.map((post) => (
-      <PostCard post={post} key={post._id} />
-    ))}
+      <h1 className='text-center text-2xl font-semibold mb-2'>#{tagName} posts</h1>
+      {posts.map((post) => (
+        <PostCard post={post} key={post._id} />
+      ))}
 
     </ContentContainer>
   )

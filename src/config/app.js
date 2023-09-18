@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import postRoutes from '../routes/post.routes.js'
-import profileRoutes from '../routes/profile.routes.js'
+import profileRoutes from '../routes/user.routes.js'
 import authRoutes from "../routes/auth.routes.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
@@ -19,7 +19,7 @@ app.use(morgan('dev'))
 app.use(cookieParser())
 
 app.use('/api/posts', postRoutes)
-app.use('/settings', profileRoutes)
+app.use('/api/settings', profileRoutes)
 app.use('/api/auth', authRoutes)
 
 

@@ -1,6 +1,7 @@
 import Post from '../models/database/Post.js'
 import Comment from '../models/database/Comment.js'
 import Tag from '../models/database/Tag.js';
+import User from '../models/database/User.js';
 
 export class PostController {
   static async getPosts (req, res) {
@@ -16,7 +17,6 @@ export class PostController {
         post.comments = comments;
 
         const tags = await Tag.find({ _id: { $in: post.tags } }).lean();
-        console.log(tags);
         post.tags = tags;
       }
       res.json(posts);

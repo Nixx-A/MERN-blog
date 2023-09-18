@@ -13,7 +13,7 @@
 }
 
 .indigo-btn {
-  @apply my-4 px-2 py-2 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 transition-colors;
+  @apply my-4 px-2 py-1.5 inline-block text-white rounded bg-blue-600 hover:bg-blue-700 duration-150 transition-colors;
 }
 
 .accordion-flex {

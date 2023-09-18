@@ -9,8 +9,10 @@ import { loginSchema } from '../../../../src/schemas/authSchema'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 
 export function LoginPage () {
-  const { signin } = useAuth()
+  const { signin, user } = useAuth()
   const navigate = useNavigate()
+
+  if (user) navigate('/')
 
   const {
     register,

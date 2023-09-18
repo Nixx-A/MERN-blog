@@ -15,7 +15,6 @@ export function Posts () {
     setLoading(true)
   }, [])
 
-  console.log(loading)
   if (loading) {
     return (
       <div className='mt-[110px]'>

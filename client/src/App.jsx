@@ -25,7 +25,7 @@ export default function App () {
 
         <BrowserRouter>
 
-          <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden'>
+          <main className='bg-[#efefef] h-screen w-screen  overflow-x-hidden'>
             <Navbar />
 
             <Routes>
@@ -43,8 +43,8 @@ export default function App () {
               <Route path='/post/:postId' element={<Post />} />
 
               <Route element={<ProtectedRoute />}>
+                <Route path='/:username' element={<ProfilePage />} />
                 <Route path='signout-confirm' element={<SignoutConfirm />} />
-                <Route path='/profile' element={<ProfilePage />} />
                 <Route path='/new' element={<PostFormPage />} />
                 <Route path='/posts/:id' element={<PostFormPage />} />
               </Route>

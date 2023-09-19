@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String, // You can use 'String' to store the URL of the image file
-    default: 'default-avatar.jpg', // Default avatar image file name or URL
+    default: 'not-user.jpg', // Default avatar image file name or URL
   },
   data_registered: { type: Date, default: Date.now }
 }, { versionKey: false })

@@ -17,6 +17,8 @@ import { Faq } from './pages/Faq'
 import { Post } from './pages/posts/Post'
 import { About } from './pages/About'
 import { Podcasts } from './pages/Podcasts'
+import { SettingsPage } from './pages/profile/SettingsPage'
+import { SettingsCustomization } from './pages/profile/SettingsCustomization'
 
 export default function App () {
   return (
@@ -44,6 +46,8 @@ export default function App () {
 
               <Route element={<ProtectedRoute />}>
                 <Route path='/:username' element={<ProfilePage />} />
+                <Route path='/settings/profile' element={<SettingsPage />} />
+                <Route path='/settings/customization' element={<SettingsCustomization />} />
                 <Route path='signout-confirm' element={<SignoutConfirm />} />
                 <Route path='/new' element={<PostFormPage />} />
                 <Route path='/posts/:id' element={<PostFormPage />} />

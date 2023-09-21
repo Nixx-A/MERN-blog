@@ -3,7 +3,6 @@ import { useAuth } from '../../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Label } from '../../components/ui/Label'
-import { useState } from 'react'
 import ControlledInput from '../../components/ControlledInput'
 
 export function SettingsPage () {

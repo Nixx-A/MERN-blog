@@ -23,7 +23,6 @@ export function LoginPage () {
   const onSubmit = handleSubmit(async values => {
     try {
       signin(values)
-      navigate('/')
     } catch (error) {
       console.log(error)
     }

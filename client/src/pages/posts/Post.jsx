@@ -28,7 +28,7 @@ export function Post () {
         {post && (
           <>
             <div className='flex gap-x-2 mb-4'>
-              <img src="/no-user-image-icon-3.jpg" alt="user" className='w-10 h-10 rounded-full' />
+              <img src="/not-user.jpg" alt="user" className='w-10 h-10 rounded-full' />
               <div className=' flex flex-col'>
                 <p className='font-semibold'>{post.author.username}</p>
                 <small className=''>{formattedData}</small>

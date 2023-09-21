@@ -3,19 +3,15 @@ import { useAuth } from '../../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Label } from '../../components/ui/Label'
-import { useState } from 'react'
-import ControlledInput from '../../components/ControlledInput'
 
 export function SettingsPage () {
   const { user } = useAuth()
   const navigate = useNavigate()
   const {
-    register,
-    handleSubmit,
-    control
+    register, handleSubmit, formState: { errors }
   } = useForm()
 
-  const onSubmit = handleSubmit(async values => {
+  const onSubmit = handleSubmit(async (values) => {
     try {
       console.log(values)
     } catch (error) {
@@ -23,9 +19,8 @@ export function SettingsPage () {
     }
   })
 
-  const handleChange = (e) => {
+  console.log(user)
 
-  }
   const handleOptionChange = (e) => {
     e.target.value === 'Profile' ? navigate(`/${user.username}`) : navigate('/settings/customization')
   }
@@ -46,10 +41,11 @@ export function SettingsPage () {
           <h3 className='font-bold text-2xl p-1'>User</h3>
 
           <div className='w-[95%] m-auto mt-6 pb-2'>
-            <ControlledInput name='username' placeholder='Write your username' label={'username'} value={user.username} control={control} defaultValue={user.username} />
+            <Label htmlFor="username">Username</Label>
+            <input type='text' name='username' placeholder='Write your username' value={user.username} className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('username')} />
 
             <Label htmlFor="email">email</Label>
-            <input type='text' name='email' placeholder='Write your email' value={user.email} onChange={handleChange} className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('email')} />
+            <input type='text' name='email' placeholder='Write your email' value={user.email} className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' />
 
             <Label htmlFor={'profile-image'}>Profile Image</Label>
             <input className='file:rounded file:outline-none file:border-0 file:p-1.5 file:bg-gray-200 file:hover:bg-gray-300  border hover:border-gray-600 duration-150 rounded p-2' type="file" name="profile-image" {...register('profile-image')} />
@@ -78,20 +74,16 @@ export function SettingsPage () {
 
             <Label htmlFor='currently-learning'>Currently learning</Label>
             <p className='text-sm font-thin'>What are you learning right now? What are the new tools and languages you are picking up right now?</p>
-            <textarea name='currently-learning' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('currently_learning')} />
+            <textarea name='currently-learning' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('currently_learning')} />
 
             <Label htmlFor={'available-for'}>Available for</Label>
-            <p className="text-sm font-thin">What kinds of collaborations or discussions are you available for? What is a good reason to say Hey! to you these days?</p>
-            <textarea name='available-for' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('available_for')} />
+            <p className="What kinds of collaborations or discussions are you available for? What's a good reason to say Hey! to you these days?">What kinds of collaborations or discussions are you available for? What is a good reason to say Hey! to you these days?</p>
+            <textarea name='available-for' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('available_for')} />
 
             <Label htmlFor={'skills-languages'}>Skills/Languages</Label>
             <p className='text-sm font-thin'>What tools and languages are you most experienced with? Are you specialized or more of a generalist?</p>
-            <textarea name='skills-languages' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('skills_languages')} placeholder='Any skills or languages you want to highlight' />
+            <textarea name='skills-languages' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('skills_languages')} placeholder='Any skills or languages you want to highlight' />
           </div>
-        </div>
-
-        <div className='bg-white flex justify-center'>
-          <button className='w-[80%] my-4 px-2 py-1 inline-block text-white rounded bg-indigo-600 hover:bg-indigo-700 duration-150 ' type='submit'>Save Profile information</button>
         </div>
       </form>
 

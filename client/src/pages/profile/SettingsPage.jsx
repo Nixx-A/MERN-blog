@@ -3,7 +3,8 @@ import { useAuth } from '../../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Label } from '../../components/ui/Label'
-import ControlledInput from '../../components/ControlledInput'
+import ControlledInput from '../../components/ui/ControlledInput'
+import ControlledTextarea from '../../components/ui/ControlledTextarea'
 
 export function SettingsPage () {
   const { user } = useAuth()
@@ -22,9 +23,6 @@ export function SettingsPage () {
     }
   })
 
-  const handleChange = (e) => {
-
-  }
   const handleOptionChange = (e) => {
     e.target.value === 'Profile' ? navigate(`/${user.username}`) : navigate('/settings/customization')
   }
@@ -47,8 +45,7 @@ export function SettingsPage () {
           <div className='w-[95%] m-auto mt-6 pb-2'>
             <ControlledInput name='username' placeholder='Write your username' label={'username'} value={user.username} control={control} defaultValue={user.username} />
 
-            <Label htmlFor="email">email</Label>
-            <input type='text' name='email' placeholder='Write your email' value={user.email} onChange={handleChange} className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('email')} />
+            <ControlledInput name={'email'} placeholder='Write your email' label={'email'} value={user.email} control={control} defaultValue={user.email} />
 
             <Label htmlFor={'profile-image'}>Profile Image</Label>
             <input className='file:rounded file:outline-none file:border-0 file:p-1.5 file:bg-gray-200 file:hover:bg-gray-300  border hover:border-gray-600 duration-150 rounded p-2' type="file" name="profile-image" {...register('profile-image')} />
@@ -59,14 +56,11 @@ export function SettingsPage () {
           <h3 className='font-bold text-2xl p-1'>Basic</h3>
 
           <div className='w-[95%] m-auto mt-6 pb-2'>
-            <Label htmlFor='website-url'>Website URL</Label>
-            <input type='text' name='website-url' placeholder='https://yourwebsite.com' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('website_url')} />
+            <ControlledInput name={'website-url'} placeholder='https://yourwebsite.com' label={'website-url'} value={user.website_url} control={control} defaultValue={user.website_url} />
 
-            <Label htmlFor='location'>Location</Label>
-            <input type='text' name='location' placeholder='Location' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('location')} />
+            <ControlledInput control={control} name={'location'} placeholder='Write your location' label={'location'} value={user.location} />
 
-            <Label htmlFor='bio'>Bio</Label>
-            <input type='text' name='bio' placeholder='A short bio...' className='mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' {...register('bio')} />
+            <ControlledInput name={'bio'} placeholder='A short bio' label={'bio'} value={user.bio} control={control} />
           </div>
         </div>
 
@@ -75,17 +69,11 @@ export function SettingsPage () {
 
           <div className='w-[95%] m-auto mt-6 pb-2'>
 
-            <Label htmlFor='currently-learning'>Currently learning</Label>
-            <p className='text-sm font-thin'>What are you learning right now? What are the new tools and languages you are picking up right now?</p>
-            <textarea name='currently-learning' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('currently_learning')} />
+            <ControlledTextarea name={'currently-learning'} defaultValue={user.currently_learning} label={'Currently learning'} control={control} text='What are you learning right now? What are the new tools and languages you are picking up right now?' />
 
-            <Label htmlFor={'available-for'}>Available for</Label>
-            <p className="text-sm font-thin">What kinds of collaborations or discussions are you available for? What is a good reason to say Hey! to you these days?</p>
-            <textarea name='available-for' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('available_for')} />
+            <ControlledTextarea name={'available-for'} defaultValue={user.available_for} label={'Available for'} control={control} text='What are you available for? What is a good reason to say Hey! to you these days?' />
 
-            <Label htmlFor={'skills-languages'}>Skills/Languages</Label>
-            <p className='text-sm font-thin'>What tools and languages are you most experienced with? Are you specialized or more of a generalist?</p>
-            <textarea name='skills-languages' className='w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none' rows={1} {...register('skills_languages')} placeholder='Any skills or languages you want to highlight' />
+            <ControlledTextarea name={'skills-languages'} defaultValue={user.skills_languages} label={'Skills/Languages'} control={control} text='What tools and languages are you most experienced with? Are you specialized or more of a generalist?' />
           </div>
         </div>
 

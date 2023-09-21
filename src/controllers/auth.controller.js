@@ -7,7 +7,8 @@ export class AuthController {
   static async register (req, res) {
     const { username, email, password } = req.body
     try {
-      const userFound = await User.findOne({ email })
+      const userFound = await User.findOne({ $or: [{ email }, { username }] });
+      console.log(userFound)
       if (userFound) return res.status(400).json({ message: ['User already exists'] })
 
       const { user, token } = await AuthModel.register({ username, email, password })
@@ -24,6 +25,7 @@ export class AuthController {
       const { user, token, isMatch } = await AuthModel.login({ email, password })
       if (!isMatch) return res.status(400).json({ message: ['Invalid credentials'] })
       res.cookie('token', token)
+      console.log(user);
       res.json(user)
     } catch (error) {
       res.status(500).json({ error: error.message })
@@ -32,6 +34,7 @@ export class AuthController {
 
   static async logout (_, res) {
     res.clearCookie('token')
+    console.log('logged out');
     res.json({ message: 'Logged out' })
   }
 
@@ -48,12 +51,10 @@ export class AuthController {
       res.json({
         id: userFound._id,
         username: userFound.username,
-        email: userFound.email
+        email: userFound.email,
+        data_registered: userFound.data_registered
       })
     })
   }
 
-  static async profile (req, res) {
-    res.json({ message: 'Is working well' })
-  }
 }

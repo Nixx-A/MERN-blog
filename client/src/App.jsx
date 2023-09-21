@@ -17,6 +17,8 @@ import { Faq } from './pages/Faq'
 import { Post } from './pages/posts/Post'
 import { About } from './pages/About'
 import { Podcasts } from './pages/Podcasts'
+import { SettingsPage } from './pages/profile/SettingsPage'
+import { SettingsCustomization } from './pages/profile/SettingsCustomization'
 
 export default function App () {
   return (
@@ -25,7 +27,7 @@ export default function App () {
 
         <BrowserRouter>
 
-          <main className='bg-[#f5f5f5] h-screen w-screen  overflow-x-hidden'>
+          <main className='bg-[#efefef] h-screen w-screen  overflow-x-hidden'>
             <Navbar />
 
             <Routes>
@@ -43,8 +45,10 @@ export default function App () {
               <Route path='/post/:postId' element={<Post />} />
 
               <Route element={<ProtectedRoute />}>
+                <Route path='/:username' element={<ProfilePage />} />
+                <Route path='/settings/profile' element={<SettingsPage />} />
+                <Route path='/settings/customization' element={<SettingsCustomization />} />
                 <Route path='signout-confirm' element={<SignoutConfirm />} />
-                <Route path='/profile' element={<ProfilePage />} />
                 <Route path='/new' element={<PostFormPage />} />
                 <Route path='/posts/:id' element={<PostFormPage />} />
               </Route>

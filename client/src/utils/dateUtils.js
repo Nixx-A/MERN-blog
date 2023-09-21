@@ -36,3 +36,8 @@ export function formatPostDate (dateString) {
     return inputDate.toLocaleDateString('en-US', options)
   }
 }
+
+export const formatProfileDate = (dateString) => {
+  const inputDate = new Date(dateString)
+  return inputDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+}

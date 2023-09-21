@@ -9,8 +9,10 @@ import { loginSchema } from '../../../../src/schemas/authSchema'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 
 export function LoginPage () {
-  const { signin } = useAuth()
+  const { signin, user } = useAuth()
   const navigate = useNavigate()
+
+  if (user) navigate('/')
 
   const {
     register,
@@ -21,7 +23,6 @@ export function LoginPage () {
   const onSubmit = handleSubmit(async values => {
     try {
       signin(values)
-      navigate('/')
     } catch (error) {
       console.log(error)
     }

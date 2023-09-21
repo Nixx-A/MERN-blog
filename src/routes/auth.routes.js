@@ -12,8 +12,6 @@ router.post('/register', validateSchema(registerSchema), AuthController.register
 
 router.post('/logout', AuthController.logout)
 
-router.get('/profile', authRequired, AuthController.profile)
-
 router.get('/verify', AuthController.verifyToken)
 
 export default router

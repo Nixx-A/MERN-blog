@@ -14,7 +14,7 @@ export default function PostCard ({ post }) {
         <div className='flex items-center'>
           <img
             className='w-10 h-10 rounded-full mr-2 '
-            src='/no-user-image-icon-3.jpg'
+            src='/not-user.jpg'
           />
           <div className=''>
             <Link

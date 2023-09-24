@@ -4,12 +4,13 @@ import { UserController } from '../controllers/user.controller.js';
 
 const router = Router()
 
-
-
 router.get('/customization', (req, res) => {
   res.json({ message: 'Customization page' })
 })
 
-router.get('/:userId', authRequired, UserController.getAllPostsByUser);
+router.get('/posts/:userId', authRequired, UserController.getAllPostsByUser);
+
+router.get('/', authRequired, UserController.getUserSettings);
+router.post('/', authRequired, UserController.changeUserSettings);
 
 export default router

@@ -10,6 +10,7 @@ import { ContentContainer } from '../../components/ui/ContentContainer'
 
 export function RegisterForm () {
   const { signup, errors: registerErrors, isAuthenticated } = useAuth()
+  console.log(registerErrors)
   const {
     register,
     handleSubmit,

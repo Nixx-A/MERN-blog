@@ -1,7 +1,6 @@
 import Post from '../models/database/Post.js'
 import Comment from '../models/database/Comment.js'
 import Tag from '../models/database/Tag.js';
-import User from '../models/database/User.js';
 
 export class PostController {
   static async getPosts (req, res) {

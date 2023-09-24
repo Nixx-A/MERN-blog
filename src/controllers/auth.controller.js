@@ -2,16 +2,20 @@ import User from '../models/database/User.js'
 import jwt from 'jsonwebtoken'
 import { TOKEN_SECRET } from '../config/config.js'
 import { AuthModel } from "../models/local-file-system/auth.js";
+import Profile from "../models/database/Profile.js";
 
 export class AuthController {
   static async register (req, res) {
     const { username, email, password } = req.body
     try {
       const userFound = await User.findOne({ $or: [{ email }, { username }] });
-      console.log(userFound)
       if (userFound) return res.status(400).json({ message: ['User already exists'] })
 
       const { user, token } = await AuthModel.register({ username, email, password })
+
+      const newProfile = new Profile({ user: user.id });
+      await newProfile.save();
+
       res.cookie('token', token)
       res.json(user)
     } catch (err) {

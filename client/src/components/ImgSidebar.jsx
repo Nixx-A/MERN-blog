@@ -5,8 +5,6 @@ import { useAuth } from '../context/AuthContext'
 export default function ImgSidebar ({ setIsOpen }) {
   const { user } = useAuth()
 
-  console.log(user)
-
   return (
     <>
       <ul

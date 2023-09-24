@@ -21,8 +21,13 @@ export class UserController {
   }
 
   static async getUserSettings (req, res) {
-    console.log(req.user.id);
-
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      res.json(profile)
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error.message })
+    }
   }
 
   static async changeUserSettings (req, res) {
@@ -50,19 +55,20 @@ export class UserController {
       profile.skills = skills
       profile.currently_learning = currently_learning
       profile.available_for = available_for
+      profile.username = username
       // ... (update other profile fields)
 
       // Save the updated profile
       await profile.save();
 
       // Update user-related fields (e.g., username and email) if needed
-      //user.username = username
-      //user.email = email
+      user.username = username
+      user.email = email
 
       // Save the updated user
       await user.save();
 
-      res.json({ message: 'Profile settings updated successfully' });
+      res.sendStatus(200);
     } catch (error) {
       // Handle any errors that may occur during the process
       console.error(error);

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-import { getPostsByUserRequest, changeSettingsRequest } from '../api/user'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getPostsByUserRequest, changeSettingsRequest, getUserSettingsRequest } from '../api/user'
 
 const UserContext = createContext()
 
@@ -13,11 +13,22 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
   const [userPosts, setUserPosts] = useState([])
+  const [userSettings, setUserSettings] = useState([])
 
   const getPostsByUser = async (userId) => {
     try {
       const res = await getPostsByUserRequest(userId)
       setUserPosts(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getUserSettings = async () => {
+    try {
+      const res = await getUserSettingsRequest()
+      console.log(res.data)
+      setUserSettings(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -32,8 +43,12 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  useEffect(() => {
+    getUserSettings()
+  }, [])
+
   return (
-    <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings }}>
+    <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings, getUserSettings, userSettings }}>
       {children}
     </UserContext.Provider>
   )

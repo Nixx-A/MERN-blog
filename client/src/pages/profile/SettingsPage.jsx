@@ -6,10 +6,11 @@ import { Label } from '../../components/ui/Label'
 import ControlledInput from '../../components/ui/ControlledInput'
 import ControlledTextarea from '../../components/ui/ControlledTextarea'
 import { useUser } from '../../context/UserContext'
+import { useEffect } from 'react'
 
 export function SettingsPage () {
   const { user } = useAuth()
-  const { changeSettings } = useUser()
+  const { changeSettings, getUserSettings, userSettings } = useUser()
   const navigate = useNavigate()
   const { register, handleSubmit, control } = useForm()
 
@@ -24,9 +25,13 @@ export function SettingsPage () {
 
   const handleOptionChange = e => {
     e.target.value === 'Profile'
-      ? navigate(`/${user.username}`)
+      ? console.log('/settings/profile')
       : navigate('/settings/customization')
   }
+
+  useEffect(() => {
+    getUserSettings()
+  }, [])
 
   return (
     <ContentContainer styles={'w-[95%] m-auto'}>
@@ -44,7 +49,7 @@ export function SettingsPage () {
       </Link>
 
       {/* Form section */}
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
+      <form className='flex flex-col gap-4 mt-4' onSubmit={handleSubmit(onSubmit)}>
         <div className='bg-white rounded '>
           <h3 className='font-bold text-2xl p-1'>User</h3>
 
@@ -53,7 +58,6 @@ export function SettingsPage () {
               name='username'
               placeholder='Write your username'
               label={'username'}
-              value={user.username}
               control={control}
               defaultValue={user.username}
             />
@@ -61,7 +65,6 @@ export function SettingsPage () {
               name={'email'}
               placeholder='Write your email'
               label={'email'}
-              value={user.email}
               control={control}
               defaultValue={user.email}
             />
@@ -84,30 +87,30 @@ export function SettingsPage () {
               name={'website_url'}
               placeholder='https://yourwebsite.com'
               label={'website URL'}
-              value={user.website_url}
               control={control}
-              defaultValue={user.website_url}
+              defaultValue={userSettings.website_url}
+              type='url'
             />
+
             <ControlledInput
               name={'github'}
               placeholder='https://github.com'
               label={'github'}
-              value={user.github}
               control={control}
-              defaultValue={user.github}
+              defaultValue={userSettings.github}
             />
             <ControlledInput
               control={control}
               name={'location'}
               placeholder='Write your location'
               label={'location'}
-              value={user.location}
+              defaultValue={userSettings.location}
             />
             <ControlledTextarea
               name={'bio'}
               placeholder='A short bio'
               label={'bio'}
-              value={user.bio}
+              defaultValue={userSettings.bio}
               control={control}
             />
           </div>
@@ -119,21 +122,21 @@ export function SettingsPage () {
           <div className='w-[95%] m-auto mt-6 pb-2'>
             <ControlledTextarea
               name={'currently_learning'}
-              defaultValue={user.currently_learning}
+              defaultValue={userSettings.currently_learning}
               label={'Currently learning'}
               control={control}
               text='What are you learning right now? What are the new tools and languages you are picking up right now?'
             />
             <ControlledTextarea
               name={'available_for'}
-              defaultValue={user.available_for}
+              defaultValue={userSettings.available_for}
               label={'Available for'}
               control={control}
               text='What are you available for? What is a good reason to say Hey! to you these days?'
             />
             <ControlledTextarea
               name={'skills'}
-              defaultValue={user.skills_languages}
+              defaultValue={userSettings.skills}
               label={'Skills/Languages'}
               control={control}
               text='What tools and languages are you most experienced with? Are you specialized or more of a generalist?'

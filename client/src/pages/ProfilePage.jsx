@@ -6,11 +6,11 @@ import { BiLinkExternal, BiSolidCake } from 'react-icons/bi'
 import { MdLocationOn } from 'react-icons/md'
 import { formatProfileDate } from '../utils/dateUtils'
 import { useEffect } from 'react'
-import { usePosts } from '../context/PostsContext'
+import { useUser } from '../context/UserContext'
 
 export function ProfilePage () {
   const { user } = useAuth()
-  const { getPostsByUser, userPosts } = usePosts()
+  const { getPostsByUser, userPosts } = useUser()
 
   console.log(user)
   console.log(userPosts)

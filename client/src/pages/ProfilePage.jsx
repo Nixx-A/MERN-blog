@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { Link, useParams } from 'react-router-dom'
 import { ContentContainer } from '../components/ui/ContentContainer'
 import { useAuth } from '../context/AuthContext'
@@ -13,7 +14,7 @@ import PostCard from '../components/posts/PostCard'
 export function ProfilePage () {
   const { userId } = useParams()
   const { user } = useAuth()
-  const { getPostsByUser, userPosts, userSettings } = useUser()
+  const { getPostsByUser, userPosts, userSettings, getUserSettings } = useUser()
   const [moreUserInfo, setmoreUserInfo] = useState(false)
   const [follow, setFollow] = useState(false)
 
@@ -24,6 +25,7 @@ export function ProfilePage () {
 
   useEffect(() => {
     getPostsByUser(userId)
+    getUserSettings(userId)
   }, [userId])
 
   const isCurrentUserProfile = user.id === userId
@@ -45,10 +47,10 @@ export function ProfilePage () {
                 <button className='indigo-btn'>
                   <Link to='/settings/profile'>Edit Profile</Link>
                 </button>
-                )
+              )
               : (
                 <button className='indigo-btn' onClick={() => setFollow(!follow)}>Follow</button>
-                )}
+              )}
           </div>
         </div>
 

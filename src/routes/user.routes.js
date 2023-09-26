@@ -10,7 +10,7 @@ router.get('/customization', (req, res) => {
 
 router.get('/posts/:userId', authRequired, UserController.getAllPostsByUser);
 
-router.get('/', authRequired, UserController.getUserSettings);
+router.get('/:userId', authRequired, UserController.getUserSettings);
 router.post('/', authRequired, UserController.changeUserSettings);
 
 export default router

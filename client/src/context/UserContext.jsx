@@ -24,9 +24,9 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const getUserSettings = async () => {
+  const getUserSettings = async (userId) => {
     try {
-      const res = await getUserSettingsRequest()
+      const res = await getUserSettingsRequest(userId)
       console.log(res.data)
       setUserSettings(res.data)
     } catch (error) {

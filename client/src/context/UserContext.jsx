@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { getPostsByUserRequest, changeSettingsRequest, getUserSettingsRequest } from '../api/user'
 
 const UserContext = createContext()
@@ -42,10 +42,6 @@ export const UserProvider = ({ children }) => {
       console.log(error)
     }
   }
-
-  useEffect(() => {
-    getUserSettings()
-  }, [])
 
   return (
     <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings, getUserSettings, userSettings }}>

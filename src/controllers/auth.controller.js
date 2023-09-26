@@ -14,6 +14,7 @@ export class AuthController {
       const { user, token } = await AuthModel.register({ username, email, password })
 
       const newProfile = new Profile({ user: user.id });
+      newProfile.username = user.username
       await newProfile.save();
 
       res.cookie('token', token)

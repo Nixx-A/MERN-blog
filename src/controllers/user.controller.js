@@ -22,7 +22,7 @@ export class UserController {
   static async getUserSettings (req, res) {
     const { userId } = req.params
     try {
-      const profile = await Profile.findOne({ user: userId });
+      const profile = await Profile.findOne({ user: userId }).populate('user')
       res.json(profile)
     } catch (error) {
       console.log(error);

@@ -8,7 +8,6 @@ export class UserController {
     try {
       const user = await User.findById(userId).populate('posts');
 
-      console.log(user);
       if (!user) return res.status(404).json({ message: 'User not found' });
       // Access the user's posts through the 'posts' virtual field
       const posts = user.posts;

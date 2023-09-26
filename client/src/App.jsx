@@ -45,7 +45,7 @@ export default function App () {
                 <Route path='/post/:postId' element={<Post />} />
 
                 <Route element={<ProtectedRoute />}>
-                  <Route path='/:username' element={<ProfilePage />} />
+                  <Route path='/:userId' element={<ProfilePage />} />
                   <Route path='/settings/profile' element={<SettingsPage />} />
                   <Route path='/settings/customization' element={<SettingsCustomization />} />
                   <Route path='signout-confirm' element={<SignoutConfirm />} />

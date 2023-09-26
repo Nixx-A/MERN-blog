@@ -15,7 +15,7 @@ export const ControlledTextarea = ({ name, label, control, placeholder, text, de
           rows={1}
             placeholder={placeholder}
             {...field}
-            className="w-[80%] mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none"
+            className="w-full mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none"
           />
         )}
       />

@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { ListImgSidebar } from './ui/ListImgSidebar'
 

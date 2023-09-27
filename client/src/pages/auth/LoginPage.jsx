@@ -9,7 +9,7 @@ import { loginSchema } from '../../../../src/schemas/authSchema'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 
 export function LoginPage () {
-  const { signin, user } = useAuth()
+  const { signin, user, errors: registerErrors } = useAuth()
   const navigate = useNavigate()
 
   if (user) navigate('/')
@@ -34,6 +34,9 @@ export function LoginPage () {
         <Methods />
 
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4'>
+          {registerErrors.map((error, index) => (
+            <p key={index} className='text-red-600 bg-red-100 mt-2 p-1 rounded text-center'>{error}</p>
+          ))}
 
           <Label htmlFor="email">Email</Label>
           <Input type='email' name='email' placeholder='Write your email' {...register('email')} />

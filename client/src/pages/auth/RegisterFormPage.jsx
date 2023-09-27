@@ -7,13 +7,14 @@ import { registerSchema } from '../../schemas/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { ContentContainer } from '../../components/ui/ContentContainer'
+import ControlledInput from '../../components/ui/ControlledInput'
 
 export function RegisterForm () {
   const { signup, errors: registerErrors, isAuthenticated } = useAuth()
-  console.log(registerErrors)
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors }
   } = useForm({ resolver: zodResolver(registerSchema) })
   const navigate = useNavigate()
@@ -47,26 +48,22 @@ export function RegisterForm () {
           <Label htmlFor="profile-image">Profile image</Label>
           <input className='file:rounded file:outline-none file:border-0 file:p-1.5 file:bg-gray-200 file:hover:bg-gray-300 duration-150 border rounded p-2' type="file" name="profile-image" {...register('profile-image')} />
 
-          <Label htmlFor="username">Username</Label>
-          <Input type='text' name='username' placeholder='Write your username' {...register('username')} />
+          <ControlledInput control={control} name='username' label='Username' placeholder='Write your username' />
           {errors.username && (
             <p className="text-red-500">{errors.username?.message}</p>
           )}
 
-          <Label htmlFor="email">Email</Label>
-          <Input type='email' name='email' placeholder='Write your email' {...register('email')} />
+          <ControlledInput control={control} name='email' label='Email' type='email' placeholder='Write your email' />
           {errors.email && (
             <span className='text-red-500'>{errors.email?.message}</span>
           )}
 
-          <Label htmlFor="password">Password</Label>
-          <Input type='password' name='password' placeholder='********' {...register('password')} />
+          <ControlledInput control={control} name='password' type='password' label='Password' placeholder='********' />
           {errors.password && (
             <span className='text-red-500'>{errors.password?.message}</span>
           )}
 
-          <Label htmlFor="confirmPassword">Password confirmation</Label>
-          <Input type='password' name='confirmPassword' placeholder='********' {...register('confirmPassword')} />
+          <ControlledInput control={control} name='confirmPassword' type='password' label='Confirm Password' placeholder='********' />
           {errors.confirmPassword && (
             <span className='text-red-500'>{errors.confirmPassword?.message}</span>
           )}

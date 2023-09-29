@@ -5,13 +5,15 @@ import { ContentContainer } from '../../components/ui/ContentContainer'
 import { usePosts } from '../../context/PostsContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { CustomSelect } from '../../components/ui/CustomContainer'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { postSchema } from '../../schemas/post'
 
 export function PostFormPage () {
   const [isModalOpen, setisModalOpen] = useState(false)
   const { getTags, createPost } = usePosts()
   const [selectedOptions, setSelectedOptions] = useState([])
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(postSchema) })
   const navigate = useNavigate()
   // const iconsStyle = 'w-10 h-10 hover:bg-indigo-400/30  hover:text-indigo-700 p-2 rounded cursor-pointer'
 
@@ -28,7 +30,8 @@ export function PostFormPage () {
 
   useEffect(() => {
     getTags()
-  }, [])
+    console.log(errors)
+  }, [errors])
 
   return (
     <>
@@ -53,10 +56,16 @@ export function PostFormPage () {
             </label>
           </div>
 
+          {errors.title && (
+            <p className="text-red-500">{errors.title?.message}</p>
+          )}
           <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
+          {errors.content && (
+            <p className="text-red-500">{errors.content?.message}</p>
+          )}
           <textarea name="content" id="content" placeholder='Write your post content here...' {...register('content')}></textarea>
 
           <div>
@@ -67,16 +76,3 @@ export function PostFormPage () {
     </>
   )
 }
-
-// eslint-disable-next-line no-lone-blocks
-{ /*   <div className='flex items-center gap-x-3 bg-gray-100/70 -ml-4'>  next update :) because idk how to do it now and i'm a little tired of this project, i'm working on it about 3 weeks, so i want to finish it as soon as possible
-  <markdown-toolbar for="content">
-    <md-bold><AiOutlineBold className={`${iconsStyle} ml-2`} /></md-bold>
-    <md-italic><AiOutlineItalic className={iconsStyle} /></md-italic>
-    <md-code><AiOutlineCode className={iconsStyle} /></md-code>
-    <md-link><AiOutlineLink className={iconsStyle} /></md-link>
-    <md-image><BiSolidImage className={iconsStyle} /></md-image>
-    <md-unordered-list><AiOutlineUnorderedList className={iconsStyle} /></md-unordered-list>
-    <md-ordered-list><AiOutlineOrderedList className={iconsStyle} /></md-ordered-list>
-  </markdown-toolbar>
-</div> */ }

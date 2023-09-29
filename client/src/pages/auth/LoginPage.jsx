@@ -1,39 +1,26 @@
-import { useForm } from 'react-hook-form'
 import { Label } from '../../components/ui/Label'
 import { Input } from '../../components/ui/Input'
 import { Methods } from './Methods'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { loginSchema } from '../../../../src/schemas/authSchema'
+import { Link } from 'react-router-dom'
 import { ContentContainer } from '../../components/ui/ContentContainer'
+import { useLoginData } from '../../hooks/useLoginData'
+import { useForm } from 'react-hook-form'
 
 export function LoginPage () {
-  const { signin, user } = useAuth()
-  const navigate = useNavigate()
+  const { handleSubmit } = useForm()
+  const { errors, onSubmit, register, registerErrors } = useLoginData()
 
-  if (user) navigate('/')
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({ resolver: zodResolver(loginSchema) })
-
-  const onSubmit = handleSubmit(async values => {
-    try {
-      signin(values)
-    } catch (error) {
-      console.log(error)
-    }
-  })
+  const handleFormSubmit = async (values) => await onSubmit(values)
 
   return (
     <ContentContainer >
       <div className='bg-white max-w-lg px-10 py-5 h-auto m-auto rounded-md shadow-md'>
         <Methods />
 
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col mt-4'>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className='flex flex-col mt-4'>
+          {registerErrors.map((error, index) => (
+            <p key={index} className='text-red-600 bg-red-100 mt-2 p-1 rounded text-center'>{error}</p>
+          ))}
 
           <Label htmlFor="email">Email</Label>
           <Input type='email' name='email' placeholder='Write your email' {...register('email')} />

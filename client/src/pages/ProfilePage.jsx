@@ -27,7 +27,12 @@ export function ProfilePage () {
     getUserSettings(userId)
   }, [userId])
 
-  const isCurrentUserProfile = user.id === userId
+  let isCurrentUserProfile
+  if (!user) {
+    isCurrentUserProfile = false
+  } else {
+     isCurrentUserProfile = user.id === userId
+  }
 
   return (
     <ContentContainer>

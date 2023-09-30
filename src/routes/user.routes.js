@@ -8,9 +8,9 @@ router.get('/customization', (req, res) => {
   res.json({ message: 'Customization page' })
 })
 
-router.get('/posts/:userId', authRequired, UserController.getAllPostsByUser);
+router.get('/posts/:userId', UserController.getAllPostsByUser);
 
-router.get('/:userId', authRequired, UserController.getUserSettings);
+router.get('/:userId', UserController.getUserSettings);
 router.post('/', authRequired, UserController.changeUserSettings);
 
 export default router

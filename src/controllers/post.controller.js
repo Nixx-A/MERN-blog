@@ -29,7 +29,6 @@ export class PostController {
     const { id } = req.params
     try {
       const post = await Post.findById(id)
-        .populate('comments')
         .populate('author')
         .lean()
 
@@ -38,7 +37,7 @@ export class PostController {
       const tags = await Tag.find({ _id: post.tags }).lean()
       post.tags = tags
 
-      const comments = await Comment.find({ post: post._id }).lean()
+      const comments = await Comment.find({ post: post._id }).lean().populate({path: 'author', select: 'avatar username'}) 
       post.comments = comments
 
       res.json(post)

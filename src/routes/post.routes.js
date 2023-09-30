@@ -15,7 +15,7 @@ router.post('/', validateSchema(createPostSchema), authRequired, PostController.
 router.delete('/:id', authRequired, PostController.deletePost)
 router.put('/:id', authRequired, PostController.updatePost)
 
-router.get('/:postId/comments', authRequired, CommentController.getComments);
+router.get('/:postId/comments', CommentController.getComments);
 router.post('/:postId/comments', authRequired, CommentController.createComment);
 router.delete('/:postId/comments/:commentId', authRequired, CommentController.deleteComment);
 

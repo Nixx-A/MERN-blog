@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest, getPostsByTagRequest } from '../api/posts'
+import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest, getPostsByTagRequest, createCommentRequest, getCommentsRequest } from '../api/posts'
 
 const PostsContext = createContext()
 
@@ -15,6 +15,7 @@ export function PostsProvider ({ children }) {
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
   const [loading, setLoading] = useState(true)
+  const [comments, setComments] = useState([])
 
   const getPosts = async () => {
     try {
@@ -63,7 +64,25 @@ export function PostsProvider ({ children }) {
     }
   }
 
-  return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags, loading, setLoading }}>
+  const getComments = async (postId) => {
+    try {
+      const res = await getCommentsRequest(postId)
+      console.log(res.data)
+      setComments(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const createComment = async (comment, postId) => {
+    try {
+      await createCommentRequest(comment, postId)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags, loading, setLoading, createComment, getComments, comments }}>
     {children}
   </PostsContext.Provider >)
 }

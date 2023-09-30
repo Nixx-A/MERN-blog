@@ -7,6 +7,7 @@ import { formatPostDate } from '../../utils/dateUtils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { markdownStyles } from '../../data/markdownStyles'
+import { Comment } from '../../components/posts/Comment'
 
 export function Post () {
   const [post, setPost] = useState(null)
@@ -19,7 +20,9 @@ export function Post () {
     getPost(postId).then(fetchedPost => {
       setPost(fetchedPost)
     })
-  }, [postId, getPost])
+  }, [postId])
+
+  console.log(post)
 
   return (
 
@@ -50,7 +53,10 @@ export function Post () {
               ))}
             </div>
 
-            <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
+            <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
+
+            <Comment post={post} />
+
           </>
         )}
       </div>

@@ -2,12 +2,13 @@ import Comment from '../models/database/Comment.js'
 
 export class CommentController {
   static async createComment(req, res) {
-    const { text } = req.body
+    const { comment } = req.body
+    console.log(req.body);
     try {
-      if (!text) return res.status(400).json({ message: 'Text is required' })
+      if (!comment) return res.status(400).json({ message: 'Text is required' })
 
       const newComment = await Comment.create({
-        text,
+        comment,
         author: req.user.id,
         post: req.params.postId
       })
@@ -21,6 +22,7 @@ export class CommentController {
   }
 
   static async getComments(req, res) {
+    console.log(req.params.postId);
     try {
       const comments = await Comment.find({ post: req.params.postId }).populate(
         'author'

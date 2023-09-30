@@ -15,7 +15,6 @@ export function PostFormPage () {
 
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(postSchema) })
   const navigate = useNavigate()
-  // const iconsStyle = 'w-10 h-10 hover:bg-indigo-400/30  hover:text-indigo-700 p-2 rounded cursor-pointer'
 
   const onSubmit = async data => {
     try {

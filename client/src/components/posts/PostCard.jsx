@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
 import { FaRegCommentDots } from 'react-icons/fa'
-import { AiOutlineLike } from 'react-icons/ai'
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai'
 import { calculateReadingTime } from '../../utils/postRead'
 import { formatPostDate } from '../../utils/dateUtils'
+import { useAuth } from '../../context/AuthContext'
 
 export default function PostCard ({ post }) {
+  const { user } = useAuth()
   const readingTime = calculateReadingTime(post.content)
   const formattedDate = formatPostDate(post.createdAt)
+
+  const isUserLiked = user && post.likes.includes(user.id)
 
   return (
     <div className='bg-white mb-4 rounded p-4 w-[95%]'>
@@ -42,7 +46,10 @@ export default function PostCard ({ post }) {
       }
 
       <div className='flex items-center w-[95%] m-auto  '>
-        <AiOutlineLike size={20} className='mr-2' color='gray ' />
+        <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded'>
+          {isUserLiked ? <AiFillLike /> : <AiOutlineLike />}
+          <p>{post.likes.length}</p>
+        </div>
         <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded'>
           <FaRegCommentDots color='gray' />
           <p>{post.comments.length}</p>

@@ -56,16 +56,12 @@ export function PostFormPage () {
             </label>
           </div>
 
-          {errors.title && (
-            <p className="text-red-500">{errors.title?.message}</p>
-          )}
-          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' name="title" id="title" placeholder='New post title here...' {...register('title')} />
+          {errors.title && <p className="text-red-500">{errors.title?.message}</p>}
+          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' autoFocus name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
-          {errors.content && (
-            <p className="text-red-500">{errors.content?.message}</p>
-          )}
+          {errors.content && <p className="text-red-500">{errors.content?.message}</p>}
           <textarea name="content" id="content" placeholder='Write your post content here...' {...register('content')}></textarea>
 
           <div>

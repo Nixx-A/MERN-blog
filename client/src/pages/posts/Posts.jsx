@@ -26,6 +26,8 @@ export function Posts () {
     )
   }
 
+  console.log(posts);
+
   return (
     < ContentContainer >
       {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}

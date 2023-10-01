@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../../context/PostsContext'
 import { ContentContainer } from '../../components/ui/ContentContainer'
-import { AiOutlineLike, AiFillLike } from 'react-icons/ai'
 import { formatPostDate } from '../../utils/dateUtils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { markdownStyles } from '../../data/markdownStyles'
 import { Comment } from '../../components/posts/Comment'
 import { useAuth } from '../../context/AuthContext'
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 
 export function Post () {
   const { postId } = useParams()
@@ -29,6 +29,7 @@ export function Post () {
   const handleLike = async () => {
     const res = await addLike(postId)
     setPost(res)
+    console.log(res)
     setUserLiked(!userLiked)
   }
 
@@ -46,7 +47,7 @@ export function Post () {
               </div>
             </div>
             <div className='w-full left-5 '>
-              {userLiked ? <AiFillLike onClick={handleLike} /> : <AiOutlineLike onClick={handleLike} />}
+              {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
               <p>{post.likes.length}</p>
             </div>
 
@@ -56,7 +57,7 @@ export function Post () {
                 <Link
                   className='hover:text-black text-gray-800 mb-4  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
                   to={`/tag/${tag._id}/${tag.name}`}
-                  key={tag.name}>
+                  key={tag._id}>
                   #{tag.name}
                 </Link>
               ))}

@@ -33,7 +33,7 @@ export default function PostCard ({ post }) {
         </div>
       </div>
 
-      <h2 className='text-xl font-semibold mb-2 inline-block hover:text-indigo-700 cursor-pointer'><Link to={`/post/${post._id}`}>{post.title}</Link></h2>
+      <h2 className='text-2xl font-semibold mb-2 inline-block hover:text-indigo-700 cursor-pointer'><Link to={`/post/${post._id}`}>{post.title}</Link></h2>
 
       {
         post.tags &&

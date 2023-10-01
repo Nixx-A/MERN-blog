@@ -43,7 +43,7 @@ export default function App () {
                 <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
                 <Route path='*' element={<Posts />} />
                 <Route path='/post/:postId' element={<Post />} />
-                <Route path='/:userId' element={<ProfilePage />} />
+                <Route path='/profile/:userId' element={<ProfilePage />} />
 
                 <Route element={<ProtectedRoute />}>
                   <Route path='/settings/profile/' element={<SettingsPage />} />

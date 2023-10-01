@@ -5,7 +5,7 @@ import { MdLocationOn } from 'react-icons/md'
 export function UserInfoSection ({ userSettings, formattedDate }) {
   return (
     <div className='w-[95%] m-auto mb-4 '>
-      <h3 className='font-bold text-xl'>{userSettings?.user.username}</h3>
+      <h3 className='font-bold text-xl'>{userSettings?.user?.username}</h3>
       <p className='mt-2 text-gray-800 '>{userSettings.bio}</p>
 
       <div className='flex flex-col md:flex-row gap-2 mt-6'>

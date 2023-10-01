@@ -6,7 +6,7 @@ export class UserController {
     const { userId } = req.params
 
     try {
-      const user = await User.findById(userId).populate('posts');
+      const user = await User.findById(userId).populate('posts').lean();
 
       if (!user) return res.status(404).json({ message: 'User not found' });
       // Access the user's posts through the 'posts' virtual field

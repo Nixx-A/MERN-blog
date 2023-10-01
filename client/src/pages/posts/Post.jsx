@@ -14,6 +14,7 @@ import { BiBookmark } from 'react-icons/bi'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
 import { PostActions } from '../../components/posts/PostAction'
+import PostTags from '../../components/posts/PostTags'
 
 export function Post () {
   const { postId } = useParams()
@@ -58,14 +59,7 @@ export function Post () {
 
             <div className='mb-8'>
               <h2 className='font-bold text-4xl mb-2'>{post.title}</h2>
-              {post.tags.map(tag => (
-                <Link
-                  className='hover:text-black text-gray-800 mb-4  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
-                  to={`/tag/${tag._id}/${tag.name}`}
-                  key={tag._id}>
-                  #{tag.name}
-                </Link>
-              ))}
+              <PostTags tags={post.tags} />
             </div>
 
             <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>

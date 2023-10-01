@@ -4,6 +4,7 @@ import { calculateReadingTime } from '../../utils/postRead'
 import { formatPostDate } from '../../utils/dateUtils'
 import { useAuth } from '../../context/AuthContext'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
+import PostTags from './PostTags'
 
 export default function PostCard ({ post }) {
   const { user } = useAuth()
@@ -11,6 +12,7 @@ export default function PostCard ({ post }) {
   const formattedDate = formatPostDate(post.createdAt)
 
   const isUserLiked = user && post.likes.includes(user.id)
+  console.log(post)
 
   return (
     <div className='bg-white mb-4 rounded p-4 w-[95%]'>
@@ -35,16 +37,7 @@ export default function PostCard ({ post }) {
 
       {
         post.tags &&
-        <div>
-          {post.tags.map(tag => (
-            <Link
-              className='hover:text-black text-gray-800  hover:bg-gray-100  px-1.5 py-0.5 hover:border-gray-300 border duration-150 border-transparent rounded'
-              to={`/tag/${tag._id}/${tag.name}`}
-              key={tag.name}>
-              #{tag.name}
-            </Link>
-          ))}
-        </div>
+        <PostTags tags={post.tags} />
       }
 
       <div className='flex items-center w-[95%] m-auto  '>

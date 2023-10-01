@@ -24,5 +24,7 @@ router.get('/tag/:tagId', TagController.getPostsByTag);
 router.post('/tags', authRequired, TagController.createTag);
 router.delete('/:postId/tags/:tagId', authRequired, TagController.deleteTag);
 
+router.post('/:postId/like', authRequired, PostController.addLike);
+
 
 export default router

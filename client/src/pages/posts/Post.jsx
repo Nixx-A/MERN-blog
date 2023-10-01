@@ -2,33 +2,41 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { usePosts } from '../../context/PostsContext'
 import { ContentContainer } from '../../components/ui/ContentContainer'
-import { AiOutlineLike } from 'react-icons/ai'
+import { AiOutlineLike, AiFillLike } from 'react-icons/ai'
 import { formatPostDate } from '../../utils/dateUtils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { markdownStyles } from '../../data/markdownStyles'
 import { Comment } from '../../components/posts/Comment'
+import { useAuth } from '../../context/AuthContext'
 
 export function Post () {
-  const [post, setPost] = useState(null)
   const { postId } = useParams()
-  const { getPost } = usePosts()
+  const { user } = useAuth()
+  const { getPost, addLike } = usePosts()
+  const [post, setPost] = useState(null)
+  const [userLiked, setUserLiked] = useState(false)
 
   const formattedData = post ? formatPostDate(post.createdAt) : ''
 
   useEffect(() => {
     getPost(postId).then(fetchedPost => {
       setPost(fetchedPost)
+      setUserLiked(fetchedPost.likes.includes(user.id))
     })
   }, [postId])
 
-  console.log(post)
+  const handleLike = async () => {
+    const res = await addLike(postId)
+    setPost(res)
+    setUserLiked(!userLiked)
+  }
 
   return (
 
     <ContentContainer styles={'bg-white w-[97%] mr-auto rounded p-2'}>
-      <div className='w-[98%] m-auto '>
-        {post && (
+      {post && (
+        <div className='w-[98%] m-auto '>
           <>
             <div className='flex gap-x-2 mb-4'>
               <img src="/not-user.jpg" alt="user" className='w-10 h-10 rounded-full' />
@@ -38,7 +46,8 @@ export function Post () {
               </div>
             </div>
             <div className='w-full left-5 '>
-              <AiOutlineLike className='' />
+              {userLiked ? <AiFillLike onClick={handleLike} /> : <AiOutlineLike onClick={handleLike} />}
+              <p>{post.likes.length}</p>
             </div>
 
             <div className='mb-8'>
@@ -57,9 +66,17 @@ export function Post () {
 
             <Comment post={post} />
 
+            <div className=' w-full m-auto overflow-hidden z-10 md:hidden fixed bottom-0 left-0 right-0  h-10  bg-gray-300'>
+              <div className='flex gap-x-2 justify-between w-[80%] m-auto'>
+                <p>Likes</p>
+                <p>Comments</p>
+                <p>Save</p>
+              </div>
+            </div>
+
           </>
-        )}
-      </div>
+        </div>
+      )}
     </ContentContainer>
   )
 }

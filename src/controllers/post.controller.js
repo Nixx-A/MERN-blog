@@ -37,7 +37,7 @@ export class PostController {
       const tags = await Tag.find({ _id: post.tags }).lean()
       post.tags = tags
 
-      const comments = await Comment.find({ post: post._id }).lean().populate({path: 'author', select: 'avatar username'}) 
+      const comments = await Comment.find({ post: post._id }).lean().populate({ path: 'author', select: 'avatar username' })
       post.comments = comments
 
       res.json(post)
@@ -76,8 +76,34 @@ export class PostController {
     }
   }
 
-
-
+  static async addLike(req, res) {
+    const { postId } = req.params;
+    const userId = req.user.id;
+  
+    try {
+      // Check if the user has already liked the post
+      const post = await Post.findById(postId);
+      if (!post) return res.status(404).json({ message: 'Post not found' });
+  
+      const alreadyLiked = post.likes.includes(userId);
+  
+      if (alreadyLiked) {
+        // User has already liked the post, so remove the like
+        await Post.findByIdAndUpdate(postId, { $pull: { likes: userId } });
+      } else {
+        // User hasn't liked the post, so add the like
+        await Post.findByIdAndUpdate(postId, { $addToSet: { likes: userId } });
+      }
+  
+      // Fetch the updated post after adding/removing the like
+      const updatedPost = await Post.findById(postId);
+  
+      res.json(updatedPost);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
 
   static async deletePost (req, res) {
     const { id } = req.params

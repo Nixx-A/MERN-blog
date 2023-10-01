@@ -15,7 +15,6 @@ export function PostFormPage () {
 
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(postSchema) })
   const navigate = useNavigate()
-  // const iconsStyle = 'w-10 h-10 hover:bg-indigo-400/30  hover:text-indigo-700 p-2 rounded cursor-pointer'
 
   const onSubmit = async data => {
     try {
@@ -56,16 +55,12 @@ export function PostFormPage () {
             </label>
           </div>
 
-          {errors.title && (
-            <p className="text-red-500">{errors.title?.message}</p>
-          )}
-          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' name="title" id="title" placeholder='New post title here...' {...register('title')} />
+          {errors.title && <p className="text-red-500">{errors.title?.message}</p>}
+          <textarea className='outline-none text-3xl font-bold placeholder:text-gray-600 focus:border-none' autoFocus name="title" id="title" placeholder='New post title here...' {...register('title')} />
 
           <CustomSelect selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
 
-          {errors.content && (
-            <p className="text-red-500">{errors.content?.message}</p>
-          )}
+          {errors.content && <p className="text-red-500">{errors.content?.message}</p>}
           <textarea name="content" id="content" placeholder='Write your post content here...' {...register('content')}></textarea>
 
           <div>

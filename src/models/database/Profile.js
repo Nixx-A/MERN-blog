@@ -14,7 +14,7 @@ const profileSchema = new Schema({
   available_for: String,
   theme: { type: String, enum: ['dark', 'light'], default: 'light' },
   following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 }, { versionKey: false })
 
 export default model('Profile', profileSchema)

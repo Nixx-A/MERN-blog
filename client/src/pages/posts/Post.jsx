@@ -9,6 +9,11 @@ import { markdownStyles } from '../../data/markdownStyles'
 import { Comment } from '../../components/posts/Comment'
 import { useAuth } from '../../context/AuthContext'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
+import { FaRegCommentDots } from 'react-icons/fa'
+import { BiBookmark } from 'react-icons/bi'
+import { AiOutlineHeart } from 'react-icons/ai'
+import { BsThreeDots } from 'react-icons/bs'
+import { PostActions } from '../../components/posts/PostAction'
 
 export function Post () {
   const { postId } = useParams()
@@ -46,7 +51,7 @@ export function Post () {
                 <small className=''>{formattedData}</small>
               </div>
             </div>
-            <div className='w-full left-5 '>
+            <div className='w-full left-5 flex items-center '>
               {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
               <p>{post.likes.length}</p>
             </div>
@@ -67,13 +72,7 @@ export function Post () {
 
             <Comment post={post} />
 
-            <div className=' w-full m-auto overflow-hidden z-10 md:hidden fixed bottom-0 left-0 right-0  h-10  bg-gray-300'>
-              <div className='flex gap-x-2 justify-between w-[80%] m-auto'>
-                <p>Likes</p>
-                <p>Comments</p>
-                <p>Save</p>
-              </div>
-            </div>
+            <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
 
           </>
         </div>

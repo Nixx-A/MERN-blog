@@ -96,8 +96,13 @@ export class PostController {
       }
 
       // Fetch the updated post after adding/removing the like
-      const updatedPost = await Post.findById(postId).populate('author').populate('tags');
+      const updatedPost = await Post.findById(postId)
+        .populate('author')
+        .populate('tags')
 
+      const comments = await Comment.find({ post: postId }).populate('author');
+      updatedPost.comments = comments;
+      
       res.json(updatedPost);
     } catch (error) {
       res.status(500).json({ error: error.message });

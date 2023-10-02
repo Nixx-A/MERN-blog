@@ -21,12 +21,14 @@ export function ProfilePage () {
   const isCurrentUserProfile = user && user.id === userId
 
   return (
-    <ContentContainer>
+    <ContentContainer styles={' w-[97%] m-auto'}>
+      <div className='md:flex items-center justify-center relative'>
       <img
-        className='w-16 h-16 relative left-4 top-6 border-red-600 bg-white border-2 rounded-full'
+        className='w-16 h-16 relative left-4 md:left-0 md:h-24 md:w-24 top-6 border-red-600 bg-white border-2 rounded-full'
         src='/nutritionist.png'
         alt={`img profile of ${user?.username}`}
-      />
+        />
+        </div>
 
       <UserInfo
         moreUserInfo={moreUserInfo}

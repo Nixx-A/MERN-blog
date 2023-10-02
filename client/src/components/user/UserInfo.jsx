@@ -10,7 +10,7 @@ export default function UserInfo ({ userSettings, setmoreUserInfo, moreUserInfo,
   const { userPosts } = useUser()
   const formattedDate = formatProfileDate(userSettings?.user?.data_registered)
   return (
-    <div className='bg-white rounded-sm w-[97%] m-auto mb-8'>
+    <div className='bg-white rounded-sm mb-8'>
       <FollowButton setFollow={setFollow} follow={follow} isCurrentUserProfile={isCurrentUserProfile} />
 
       <UserInfoSection formattedDate={formattedDate} userSettings={userSettings} />

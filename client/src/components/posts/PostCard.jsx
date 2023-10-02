@@ -6,8 +6,9 @@ import { useAuth } from '../../context/AuthContext'
 import PostTags from './PostTags'
 import { PostAuthorInfo } from './PostAuthorInfo'
 import LikeButton from './LikeButton'
+import { BiBookmark } from 'react-icons/bi'
 
-export default function PostCard({ post }) {
+export default function PostCard ({ post }) {
   const { user } = useAuth()
   const readingTime = calculateReadingTime(post.content)
   const formattedDate = formatPostDate(post.createdAt)
@@ -22,13 +23,21 @@ export default function PostCard({ post }) {
 
       {post.tags && <PostTags tags={post.tags} />}
 
-      <div className='flex items-center w-[95%] m-auto  '>
-        <LikeButton isUserLiked={isUserLiked} likes={post.likes.length} />
-        <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded'>
-          <FaRegCommentDots color='gray' />
-          <p>{post.comments.length}</p>
+      <div className='flex justify-between items-center w-[95%] m-auto  '>
+        <div className='flex'>
+          <LikeButton isUserLiked={isUserLiked} likes={post.likes.length} />
+          <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded'>
+            <FaRegCommentDots color='gray' />
+            <p>{post.comments.length}</p>
+          </div>
         </div>
-        <small className='ml-auto'>{readingTime} min read</small>
+
+        <div className='flex gap-x-3 items-center'>
+          <small className='ml-auto'>{readingTime} min read</small>
+          <div className='p-1 hover:bg-indigo-400/30 rounded cursor-pointer'>
+            <BiBookmark />
+          </div>
+        </div>
       </div>
     </div>
   )

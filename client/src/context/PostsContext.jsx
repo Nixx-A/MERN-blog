@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest, getPostsByTagRequest, createCommentRequest, getCommentsRequest, addLikeRequest, deleteCommentRequest } from '../api/posts'
+import { getPostRequest, createPostRequest, getPostsRequest, getTagsRequest, getPostsByTagRequest, createCommentRequest, getCommentsRequest, addLikeRequest, getLatestPostsRequest, getTopPostsRequest } from '../api/posts'
 
 const PostsContext = createContext()
 
@@ -91,7 +91,29 @@ export function PostsProvider ({ children }) {
     }
   }
 
-  return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags, loading, setLoading, createComment, getComments, comments, addLike }}>
+  const getLatestPosts = async () => {
+    try {
+      const res = await getLatestPostsRequest()
+      setPosts(res.data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const getTopPosts = async () => {
+    try {
+      const res = await getTopPostsRequest()
+      setPosts(res.data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (<PostsContext.Provider value={{ getPosts, posts, getPostsByTag, createPost, getPost, tags, getTags, loading, setLoading, getLatestPosts, createComment, getComments, comments, addLike, getTopPosts }}>
     {children}
   </PostsContext.Provider >)
 }

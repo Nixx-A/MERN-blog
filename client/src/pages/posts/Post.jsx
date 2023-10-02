@@ -11,6 +11,7 @@ import { useAuth } from '../../context/AuthContext'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { PostActions } from '../../components/posts/PostAction'
 import PostTags from '../../components/posts/PostTags'
+import { PostAuthorInfo } from '../../components/posts/PostAuthorInfo'
 
 export function Post () {
   const navigate = useNavigate()
@@ -42,13 +43,8 @@ export function Post () {
     <ContentContainer styles={'bg-white w-[97%] mr-auto rounded p-2'}>
       {post && (
         <div className='w-[98%] m-auto '>
-          <div className='flex gap-x-2 mb-4'>
-            <img src="/not-user.jpg" alt="user" className='w-10 h-10 rounded-full' />
-            <div className=' flex flex-col'>
-              <p className='font-semibold'>{post.author.username}</p>
-              <small className=''>{formattedData}</small>
-            </div>
-          </div>
+
+          <PostAuthorInfo author={post.author} postDate={formattedData} />
           <div className='w-full left-5 flex items-center '>
             {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
             <p>{post.likes.length}</p>

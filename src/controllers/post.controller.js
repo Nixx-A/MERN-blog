@@ -102,7 +102,7 @@ export class PostController {
 
       const comments = await Comment.find({ post: postId }).populate('author');
       updatedPost.comments = comments;
-      
+
       res.json(updatedPost);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -133,4 +133,35 @@ export class PostController {
       res.status(500).json({ error: error.message })
     }
   }
+
+  static async getLatestPosts (req, res) {
+    try {
+      const latestPosts = await Post.find()
+        .sort({ createdAt: -1 })
+        .limit(10)
+        .populate('author')
+        .lean()
+
+        if (!latestPosts) return res.status(404).json({ message: 'Posts not found'})
+
+      res.json(latestPosts)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
+  static async getTopPosts (req, res) {
+    try {
+     const topPosts = await Post.find()
+     .sort({ likes: -1 })
+     .limit(10)
+     .populate('author')
+     .lean()
+
+     res.json(topPosts)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
 }

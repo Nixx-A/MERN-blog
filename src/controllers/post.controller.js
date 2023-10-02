@@ -140,6 +140,7 @@ export class PostController {
         .sort({ createdAt: -1 })
         .limit(10)
         .populate('author')
+        .populate('tags')
         .lean()
 
         if (!latestPosts) return res.status(404).json({ message: 'Posts not found'})
@@ -156,6 +157,7 @@ export class PostController {
      .sort({ likes: -1 })
      .limit(10)
      .populate('author')
+     .populate('tags')
      .lean()
 
      res.json(topPosts)

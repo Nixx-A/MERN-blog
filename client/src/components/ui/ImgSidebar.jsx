@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useAuth } from '../context/AuthContext'
-import { ListImgSidebar } from './ui/ListImgSidebar'
+import { useAuth } from '../../context/AuthContext'
+import { ListImgSidebar } from './ListImgSidebar'
 
 export default function ImgSidebar ({ setIsOpen }) {
   const { user } = useAuth()

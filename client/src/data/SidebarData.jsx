@@ -1,4 +1,4 @@
-import { AiFillHome, AiFillTags, AiOutlineSearch } from 'react-icons/ai'
+import { AiFillHome, AiFillTags } from 'react-icons/ai'
 import { PiMicrophoneLight } from 'react-icons/pi'
 import { FaLightbulb } from 'react-icons/fa'
 import { FcAbout } from 'react-icons/fc'
@@ -12,12 +12,12 @@ export const sidebarData = [
     icon: <AiFillHome className={iconStyles} />,
     cName: 'nav-text'
   },
-  {
+  /*  {
     title: 'Search',
     path: '/search',
     icon: <AiOutlineSearch className={iconStyles} />,
     cName: 'nav-text'
-  },
+  }, */
   {
     title: 'Podcasts',
     path: '/podcasts',

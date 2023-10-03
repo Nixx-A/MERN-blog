@@ -3,6 +3,7 @@ import { ContentContainer } from '../components/ui/ContentContainer'
 import { useParams } from 'react-router-dom'
 import { usePosts } from '../context/PostsContext'
 import PostCard from '../components/posts/PostCard'
+import { MainPostsUi } from '../components/posts/MainPostsUi'
 
 export function TagPostsPage () {
   const { tagId, tagName } = useParams()
@@ -14,10 +15,12 @@ export function TagPostsPage () {
 
   return (
     <ContentContainer>
-      <h1 className='text-center text-2xl font-semibold mb-2'>#{tagName} posts</h1>
-      {posts.map((post) => (
-        <PostCard post={post} key={post._id} />
-      ))}
+      <MainPostsUi>
+        <h1 className='text-center text-2xl font-semibold mb-2'>#{tagName} posts</h1>
+        {posts.map((post) => (
+          <PostCard post={post} key={post._id} />
+        ))}
+      </MainPostsUi>
 
     </ContentContainer>
   )

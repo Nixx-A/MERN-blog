@@ -1,47 +1,43 @@
 import { usePosts } from '../../context/PostsContext'
 import { useLocation } from 'react-router-dom'
 import { ContentContainer } from '../../components/ui/ContentContainer'
-import PostsNavigation from '../../components/PostsNavigation'
+import PostsNavigation from '../../components/posts/PostsNavigation'
 import PostCard from '../../components/posts/PostCard'
-import { PostCardLoading } from '../../components/PostLoadingSkeleton'
+import { PostCardLoading } from '../../components/posts/PostLoadingSkeleton'
 import { useEffect } from 'react'
+import { MainPostsUi } from '../../components/posts/MainPostsUi'
 
 export function Posts () {
-  const { posts, getPosts, loading, setLoading } = usePosts()
+  const { posts, getPosts, loading, setLoading, getLatestPosts, getTopPosts } =
+    usePosts()
   const location = useLocation()
 
   useEffect(() => {
-    getPosts()
     setLoading(true)
-  }, [])
 
-  if (loading) {
-    return (
-      <div className='mt-[110px]'>
-        <PostCardLoading />
-        <PostCardLoading />
-        <PostCardLoading />
-        <PostCardLoading />
-      </div>
-    )
-  }
+    if (location.pathname === '/') {
+      getPosts()
+    } else if (location.pathname === '/latest') {
+      getLatestPosts()
+    } else if (location.pathname === '/top-week') {
+      getTopPosts()
+    }
+  }, [location.pathname])
 
-  console.log(posts)
   return (
-    < ContentContainer >
-      {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}
+    <ContentContainer>
       <div>
-        <PostsNavigation />
+        {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}
+        <MainPostsUi>
+          <PostsNavigation />
 
-        {
-          location.pathname === '/' &&
-          posts.map((post) => (
-            <PostCard post={post} key={post._id} />
-          ))
-        }
-        {location.pathname === '/latest' && <p>Latest</p>}
-        {location.pathname === '/top-week' && <p>Top</p>}
+          {loading && posts.map(post => <PostCardLoading key={post._id} />)}
+          {location.pathname === '/' && posts.map(post => <PostCard post={post} key={post._id} />)}
+          {location.pathname === '/latest' && posts.map(post => <PostCard post={post} key={post._id} />)}
+          {location.pathname === '/top-week' && posts.map(post => <PostCard post={post} key={post._id} />)}
+        </MainPostsUi>
       </div>
+
     </ContentContainer >
   )
 }

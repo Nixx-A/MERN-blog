@@ -21,3 +21,7 @@ export const createCommentRequest = async (comment, postId) => axios.post(`/post
 export const deleteCommentRequest = async (commentId, postId) => axios.delete(`/posts/${postId}/comments/${commentId}`)
 
 export const addLikeRequest = async (postId) => axios.post(`/posts/${postId}/like`)
+
+export const getLatestPostsRequest = async () => axios.get('/posts/latest')
+
+export const getTopPostsRequest = async () => axios.get('/posts/top')

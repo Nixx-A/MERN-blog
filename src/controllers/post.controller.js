@@ -76,17 +76,17 @@ export class PostController {
     }
   }
 
-  static async addLike(req, res) {
+  static async addLike (req, res) {
     const { postId } = req.params;
     const userId = req.user.id;
-  
+
     try {
       // Check if the user has already liked the post
       const post = await Post.findById(postId);
       if (!post) return res.status(404).json({ message: 'Post not found' });
-  
+
       const alreadyLiked = post.likes.includes(userId);
-  
+
       if (alreadyLiked) {
         // User has already liked the post, so remove the like
         await Post.findByIdAndUpdate(postId, { $pull: { likes: userId } });
@@ -94,16 +94,21 @@ export class PostController {
         // User hasn't liked the post, so add the like
         await Post.findByIdAndUpdate(postId, { $addToSet: { likes: userId } });
       }
-  
+
       // Fetch the updated post after adding/removing the like
-      const updatedPost = await Post.findById(postId);
-  
+      const updatedPost = await Post.findById(postId)
+        .populate('author')
+        .populate('tags')
+
+      const comments = await Comment.find({ post: postId }).populate('author');
+      updatedPost.comments = comments;
+
       res.json(updatedPost);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
-  
+
 
   static async deletePost (req, res) {
     const { id } = req.params
@@ -128,4 +133,37 @@ export class PostController {
       res.status(500).json({ error: error.message })
     }
   }
+
+  static async getLatestPosts (req, res) {
+    try {
+      const latestPosts = await Post.find()
+        .sort({ createdAt: -1 })
+        .limit(10)
+        .populate('author')
+        .populate('tags')
+        .lean()
+
+        if (!latestPosts) return res.status(404).json({ message: 'Posts not found'})
+
+      res.json(latestPosts)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
+  static async getTopPosts (req, res) {
+    try {
+     const topPosts = await Post.find()
+     .sort({ likes: -1 })
+     .limit(10)
+     .populate('author')
+     .populate('tags')
+     .lean()
+
+     res.json(topPosts)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
+
 }

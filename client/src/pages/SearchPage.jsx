@@ -1,6 +1,5 @@
 import { BiSearch } from 'react-icons/bi'
 import { ContentContainer } from '../components/ui/ContentContainer'
-import { Posts } from './posts/Posts'
 
 export function SearchPage () {
   return (
@@ -10,7 +9,7 @@ export function SearchPage () {
         <button className='w-6 h-6'><BiSearch className='relative right-[calc(100%-(-8px))] w-6 h-6' /></button>
       </form>
 
-      <Posts />
+<p className='text-center font-semibold mt-8'>No feature of search yet :(</p>
     </ContentContainer>
   )
 }

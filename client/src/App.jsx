@@ -3,7 +3,7 @@ import { Posts } from './pages/posts/Posts'
 import { LoginPage } from './pages/auth/LoginPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { PostFormPage } from './pages/posts/PostFormPage'
-import { Navbar } from './components/Navbar'
+import { Navbar } from './components/ui/Navbar'
 import { SearchPage } from './pages/SearchPage'
 import { Methods } from './pages/auth/Methods'
 import { RegisterForm } from './pages/auth/RegisterFormPage'
@@ -30,6 +30,7 @@ export default function App () {
           <BrowserRouter>
             <main className='bg-[#efefef] h-screen w-screen  overflow-x-hidden'>
               <Navbar />
+
               <Routes>
                 <Route path='/' element={<Posts />} />
                 <Route path='/login' element={<LoginPage />} />
@@ -43,7 +44,7 @@ export default function App () {
                 <Route path='/tag/:tagId/:tagName' element={<TagPostsPage />} />
                 <Route path='*' element={<Posts />} />
                 <Route path='/post/:postId' element={<Post />} />
-                <Route path='/:userId' element={<ProfilePage />} />
+                <Route path='/profile/:userId' element={<ProfilePage />} />
 
                 <Route element={<ProtectedRoute />}>
                   <Route path='/settings/profile/' element={<SettingsPage />} />
@@ -53,6 +54,7 @@ export default function App () {
                   <Route path='/posts/:id' element={<PostFormPage />} />
                 </Route>
               </Routes>
+
             </main>
           </BrowserRouter>
 

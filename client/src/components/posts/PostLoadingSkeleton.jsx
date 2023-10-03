@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 export function PostCardLoading () {
   return (
 
-    <div className='mb-6 rounded p-4 w-[95%] animate-pulse bg-gray-500'>
+    <div className='mb-6 rounded p-4 w-[100%] animate-pulse bg-gray-500'>
       <ContentLoader
         speed={2}
         width={300}

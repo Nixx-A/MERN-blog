@@ -22,7 +22,7 @@ export function Comment ({ post }) {
     window.location.reload()
   }
   return (
-    <div>
+    <div className=''>
       <div className='flex items-center gap-x-2 font-bold p-2'>
         <h3 className='text-xl'>Comments</h3>
         <p>({post.comments.length})</p>
@@ -57,7 +57,7 @@ export function Comment ({ post }) {
         </div>
       )}
 
-      <div className='mt-8'>
+      <div className='mt-8 mb-12'>
         {post.comments.map(comment => (
           <CommentCard key={comment._id} comment={comment} />
         ))}

@@ -9,6 +9,9 @@ import { validateSchema } from '../middlewares/validator.js';
 const router = Router()
 
 router.get('/', PostController.getPosts)
+router.get('/latest', PostController.getLatestPosts)
+router.get('/top', PostController.getTopPosts)
+
 router.get('/tags', TagController.getTags);
 router.get('/:id', PostController.getPost)
 router.post('/', validateSchema(createPostSchema), authRequired, PostController.createPost)

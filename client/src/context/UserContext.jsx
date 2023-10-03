@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-import { getPostsByUserRequest, changeSettingsRequest, getUserSettingsRequest } from '../api/user'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getPostsByUserRequest, changeSettingsRequest, getUserSettingsRequest, changeThemeRequest, getThemeRequest } from '../api/user'
 
 const UserContext = createContext()
 
@@ -14,6 +14,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
   const [userPosts, setUserPosts] = useState([])
   const [userSettings, setUserSettings] = useState([])
+  const [theme, setTheme] = useState('light')
 
   const getPostsByUser = async (userId) => {
     try {
@@ -43,8 +44,31 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const toggleTheme = async (userRequest) => {
+    try {
+      const res = await changeThemeRequest(userRequest)
+      setTheme(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getTheme = async () => {
+    try {
+      const res = await getThemeRequest()
+      console.log(res)
+      setTheme(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getTheme()
+  }, [])
+
   return (
-    <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings, getUserSettings, userSettings }}>
+    <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings, getUserSettings, userSettings, toggleTheme, theme, getTheme }}>
       {children}
     </UserContext.Provider>
   )

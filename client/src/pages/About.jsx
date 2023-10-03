@@ -5,10 +5,10 @@ export function About () {
   return (
     <ContentContainer>
 
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-100 dark:bg-black min-h-screen">
 
         <main className="container mx-auto py-8">
-          <article className="bg-white p-6 rounded-lg shadow-lg">
+          <article className="bg-white dark:bg-[#171717] p-6 rounded-lg shadow-lg">
 
             <h2 className='text-3xl font-bold mb-6'>About Nixx</h2>
 
@@ -37,7 +37,7 @@ export function About () {
 
             {/* Main Content */}
             <div className="mt-6 prose">
-              <blockquote>
+              <blockquote className='border-l-4 border-gray-300 pl-4 mb-4 italic dark:text-white'>
                 <p>The only way to do great work is to love what you do.</p>
                 <small>Steve Jobs</small>
               </blockquote>
@@ -46,7 +46,7 @@ export function About () {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-600 py-4  bottom-0  w-full  text-white text-center">
+        <footer className="bg-gray-600 dark:bg-black dark:border-t py-4  bottom-0  w-full  text-white text-center">
           <p>&copy; 2023 Nixx</p>
         </footer>
       </div>

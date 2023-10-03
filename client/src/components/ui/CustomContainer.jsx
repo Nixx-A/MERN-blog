@@ -18,16 +18,16 @@ export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
   }
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block w-[98%] m-auto text-left">
       <div>
         <span
-          className="rounded-md shadow-sm cursor-pointer gap-x-2 bg-white text-gray-700 border border-none px-4 py-2 inline-flex items-center"
+          className="rounded-md shadow-sm cursor-pointer gap-x-2 bg-white dark:bg-black dark:border dark:text-white dark:border-white text-gray-700  px-4 py-2 inline-flex items-center"
           onClick={toggleDropdown}
         >
           {selectedOptions.length > 0
             ? (
               selectedOptions.map((tag, index) => (
-                <span key={index} className="bg-gray-100 rounded px-1.5 py-0.5">
+                <span key={index} className="bg-gray-100 dark:bg-[#171717] rounded px-1.5 py-0.5]">
                   #{tag}
                 </span>
               ))
@@ -36,10 +36,10 @@ export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
               'Add up to 4 tags'
             )}
         </span>
-        {selectedOptions.length === 4 && <p>You have reached the limit</p>}
+        {selectedOptions.length === 4 && <p className='dark:text-white'>You have reached the limit</p>}
       </div>
       {isOpen && (
-        <div className="absolute mt-2 w-[95%] m-auto left-0 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="absolute mt-2 w-[95%] m-auto left-0 rounded-md shadow-lg bg-white dark:bg-black first-letter: ring-1 ring-black ring-opacity-5">
           <div
             className="py-1"
             role="menu"
@@ -51,7 +51,7 @@ export const CustomSelect = ({ selectedOptions, setSelectedOptions }) => {
                 key={tag._id}
                 onClick={() => handleOptionClick(tag.name)}
                 className={`block px-4 py-2 text-sm cursor-pointer ${selectedOptions.includes(tag.name)
-                  ? 'bg-indigo-200 text-blue-800'
+                  ? 'bg-indigo-200 dark:bg-[#171717] dark:text-indigo-500 text-blue-800'
                   : ''
                   }`}
                 role="menuitem"

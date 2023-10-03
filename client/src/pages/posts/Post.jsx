@@ -40,7 +40,7 @@ export function Post () {
 
   return (
 
-    <ContentContainer styles={'bg-white w-[97%] mr-auto rounded p-2'}>
+    <ContentContainer styles={'bg-white w-[97%] dark:bg-[#171717] mr-auto rounded p-2'}>
       {post && (
         <div className='w-[98%] m-auto '>
 
@@ -55,7 +55,7 @@ export function Post () {
             <PostTags tags={post.tags} />
           </div>
 
-          <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
+          <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b dark:border-gray-800 pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
           <Comment post={post} />
           <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
         </div>

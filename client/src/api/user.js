@@ -5,3 +5,7 @@ export const getPostsByUserRequest = async (userId) => axios.get(`/settings/post
 export const getUserSettingsRequest = async (userId) => axios.get(`/settings/${userId}`)
 
 export const changeSettingsRequest = async (settings, userId) => axios.post('/settings', { settings, userId })
+
+export const getThemeRequest = async () => axios.get('/settings/theme')
+
+export const changeThemeRequest = async (theme) => axios.post('/settings/theme', { theme })

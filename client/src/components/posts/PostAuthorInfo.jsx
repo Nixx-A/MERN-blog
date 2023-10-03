@@ -11,7 +11,7 @@ export function PostAuthorInfo ({ author, postDate }) {
       </Link>
       <div className='flex flex-col'>
         <Link
-          className='font-semibold text-gray-800 hover:text-black'
+          className='font-semibold text-gray-800 hover:text-black dark:text-gray-200 dark:hover:text-white'
           to={`/profile/${author._id}`}>
           {author.username}
         </Link>

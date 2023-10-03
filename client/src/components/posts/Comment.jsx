@@ -41,7 +41,7 @@ export function Comment ({ post }) {
               name='comment'
               onFocus={() => setShowBtn(true)}
               rows={4}
-              className='rounded-md outline-none border border-gray-200 placeholder:text-gray-800 p-2 w-[98%] m-auto'
+              className='rounded-md outline-none border border-gray-200 placeholder:text-gray-800 p-2 w-[98%] m-auto dark:bg-black dark:text-white dark:placeholder:text-gray-400 dark:focus:border-indigo-600 duration-150 dark:border-black'
               placeholder='Add to the discussion...'
               {...register('comment')}
             />

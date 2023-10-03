@@ -27,7 +27,7 @@ export function Posts () {
   return (
     <ContentContainer>
       <div>
-        {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4'>No posts</h2>}
+        {posts.length === 0 && <h2 className='text-center text-2xl font-semibold mt-4 dark:text-white'>No posts</h2>}
         <MainPostsUi>
           <PostsNavigation />
 

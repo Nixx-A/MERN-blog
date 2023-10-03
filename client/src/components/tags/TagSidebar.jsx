@@ -12,7 +12,7 @@ export function TagSidebar () {
   return (
     <div className='hidden md:flex justify-center mt-4 w-[40%]' >
       <div className='p-2 m-1 w-full rounded'>
-        <div className='bg-white p-2 rounded w-full  duration-100'>
+        <div className='bg-white dark:bg-[#171717] p-2 rounded w-full  duration-100'>
 
           <h3 className='text-2xl font-semibold mb-2'>Tags</h3>
           {tags.map(tag => (

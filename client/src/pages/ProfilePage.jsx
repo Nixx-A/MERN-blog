@@ -24,7 +24,7 @@ export function ProfilePage () {
     <ContentContainer styles={' w-[97%] m-auto'}>
       <div className='md:flex items-center justify-center relative'>
       <img
-        className='w-16 h-16 relative left-4 md:left-0 md:h-24 md:w-24 top-6 border-red-600 bg-white border-2 rounded-full'
+        className='w-16 h-16 relative left-4 md:left-0 md:h-24 md:w-24 top-6 border-red-600 bg-white dark:bg-[#171717] border-2 rounded-full'
         src='/nutritionist.png'
         alt={`img profile of ${user?.username}`}
         />
@@ -40,7 +40,7 @@ export function ProfilePage () {
       />
 
       {userPosts.map(post => (
-        <div key={post._id} className='bg-white rounded-md  shadow '>
+        <div key={post._id} className=''>
           <PostCard post={post} />
         </div>
       ))}

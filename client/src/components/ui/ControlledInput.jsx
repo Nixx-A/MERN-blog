@@ -14,7 +14,7 @@ export const ControlledInput = ({ name, label, control, placeholder, defaultValu
           type={type}
             placeholder={placeholder}
             {...field}
-            className="w-full mt-1 block border hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none"
+            className="w-full mt-1 block border dark:bg-black hover:border-gray-600 duration-150 px-2 py-1.5 rounded focus:border-blue-500 outline-none"
           />
         )}
       />

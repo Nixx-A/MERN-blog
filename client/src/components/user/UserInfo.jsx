@@ -10,7 +10,7 @@ export default function UserInfo ({ userSettings, setmoreUserInfo, moreUserInfo,
   const { userPosts } = useUser()
   const formattedDate = formatProfileDate(userSettings?.user?.data_registered)
   return (
-    <div className='bg-white rounded-sm mb-8'>
+    <div className='bg-white rounded-sm mb-8 dark:bg-[#171717] dark:text-white'>
       <FollowButton setFollow={setFollow} follow={follow} isCurrentUserProfile={isCurrentUserProfile} />
 
       <UserInfoSection formattedDate={formattedDate} userSettings={userSettings} />
@@ -19,7 +19,7 @@ export default function UserInfo ({ userSettings, setmoreUserInfo, moreUserInfo,
 
       {
         moreUserInfo &&
-        <div className='bg-white rounded-sm w-[97%] m-auto mt-4 mb-8'>
+        <div className='bg-white dark:bg-[#171717] rounded-sm w-[97%] m-auto mt-4 mb-8'>
 
           <div className='w-[95%] m-auto p-2'>
             <ExtraUserInfo label='Skills/languages' text={userSettings.skills} />

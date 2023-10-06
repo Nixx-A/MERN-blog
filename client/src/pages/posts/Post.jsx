@@ -12,6 +12,8 @@ import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { PostActions } from '../../components/posts/PostAction'
 import PostTags from '../../components/posts/PostTags'
 import { PostAuthorInfo } from '../../components/posts/PostAuthorInfo'
+import { PostSidebar } from '../../components/posts/PostSidebar'
+import DeletePostBtn from '../../components/posts/DeletePostBtn'
 
 export function Post () {
   const navigate = useNavigate()
@@ -45,35 +47,35 @@ export function Post () {
 
   return (
 
-    <ContentContainer styles={'bg-white w-[97%] dark:bg-[#171717] mr-auto rounded p-2'}>
+    <ContentContainer styles={'bg-white w-[97%] md:flex dark:bg-black mr-auto rounded p-2'}>
       {post && (
-        <div className='w-[98%] m-auto '>
-          {user.username === post.author.username && (
-            <div className='flex w-full justify-end'>
-              <button
-                onClick={handleDelete}
-                className='bg-red-500  text-white py-2 px-4 mt-4 rounded hover:bg-red-600'
-              >
-                Delete Post
-              </button>
+        <>
+          <div className='md:bock w-[10%] lg:w-[7%]'>
+            <PostSidebar post={post} userLiked={userLiked} handleLike={handleLike} />
+          </div>
+
+          <div className='w-full p-2 m-auto md:pl-4 dark:bg-[#171717]'>
+            {user.username === post.author.username && (
+              <div className='flex w-full items-center justify-between'>
+                <PostAuthorInfo author={post.author} postDate={formattedData} />
+                <DeletePostBtn handleDelete={handleDelete} />
+              </div>
+            )}
+            <div className='w-full left-5 flex items-center '>
+              {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
+              <p>{post.likes.length}</p>
             </div>
-          )}
 
-          <PostAuthorInfo author={post.author} postDate={formattedData} />
-          <div className='w-full left-5 flex items-center '>
-            {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
-            <p>{post.likes.length}</p>
+            <div className='mb-8'>
+              <h2 className='font-bold text-4xl mb-2'>{post.title}</h2>
+              <PostTags tags={post.tags} />
+            </div>
+
+            <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b dark:border-gray-800 pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
+            <Comment post={post} />
+            <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
           </div>
-
-          <div className='mb-8'>
-            <h2 className='font-bold text-4xl mb-2'>{post.title}</h2>
-            <PostTags tags={post.tags} />
-          </div>
-
-          <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b dark:border-gray-800 pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
-          <Comment post={post} />
-          <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
-        </div>
+        </>
       )}
     </ContentContainer>
   )

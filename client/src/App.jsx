@@ -18,12 +18,19 @@ import { Podcasts } from './pages/Podcasts'
 import { SettingsPage } from './pages/profile/SettingsPage'
 import { SettingsCustomization } from './pages/profile/SettingsCustomization'
 import { useUser } from './context/UserContext'
+import { useAuth } from './context/AuthContext'
 
 export default function App () {
   const { theme } = useUser()
+  const { loading } = useAuth()
+
+  if (loading) {
+    return <div className='flex justify-center items-center h-screen' >Loading...</div>
+  }
+
   return (
 
-    <main className={`bg-[#efefef] h-screen w-screen overflow-x-hidden  ${theme === 'dark' ? 'dark bg-black duration-150 text-white' : ''}`} >
+    <main className={`bg-[#efefef] h-screen w-screen overflow-x-hidden  ${theme === 'dark' ? 'dark bg-black duration-75 text-white' : ''}`} >
       <Navbar />
 
       <Routes>

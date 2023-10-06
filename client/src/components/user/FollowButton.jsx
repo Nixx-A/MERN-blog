@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export function FollowButton ({ isCurrentUserProfile, follow, setFollow }) {
   return (
-    <div className='bg-white rounded-sm w-[97%] m-auto '>
+    <div className='bg-white dark:bg-[#171717] rounded-sm w-[97%] m-auto '>
       <div className='flex ml-auto justify-end mr-8'>
         {isCurrentUserProfile
           ? (

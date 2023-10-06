@@ -19,10 +19,10 @@ export function Accordion ({ question, answer }) {
     <>
       <div className='mb-[5px] w-full flex justify-center'>
           <button
-            className={`p-2 border-gray-100 rounded-md shadow-md cursor-pointer w-[98%]  md:w-[65%]  ${active}`}
+            className={`p-2 border-gray-100 rounded-md dark:bg-black shadow-md cursor-pointer w-[98%]  md:w-[65%]  ${active}`}
             onClick={toggleAccordion}>
             <div className=''>
-              <div className='flex items-center min-h-[20px] text-left  hover:text-indigo-700'>
+              <div className='flex items-center min-h-[20px] text-left  hover:text-indigo-700 dark:hover:text-indigo-500'>
                 <h4 className='ml-2'>{question}</h4>
                 <FiPlus
                   className={active ? 'question-icon rotate' : 'question-icon'}

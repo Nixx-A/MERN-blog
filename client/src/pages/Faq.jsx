@@ -3,7 +3,7 @@ import { ContentContainer } from '../components/ui/ContentContainer'
 import { faqs } from '../data/faq'
 export function Faq () {
   return (
-    <ContentContainer styles={'w-[97%] p-4 m-auto h-full rounded bg-white'}>
+    <ContentContainer styles={'w-[97%] p-4 m-auto h-full rounded bg-white dark:bg-[#171717]'}>
       <h1 className='text-3xl font-bold'>Frequently Asked Questions 🤔</h1>
       <p className=' mt-1 '>Some of these are not actually asked frequently, but they are still good to know.</p>
         <div className='accordion-flex'>

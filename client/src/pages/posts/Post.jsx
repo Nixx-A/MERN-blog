@@ -17,7 +17,7 @@ export function Post () {
   const navigate = useNavigate()
   const { postId } = useParams()
   const { user } = useAuth()
-  const { getPost, addLike } = usePosts()
+  const { getPost, addLike, deletePost } = usePosts()
   const [post, setPost] = useState(null)
   const [userLiked, setUserLiked] = useState(false)
 
@@ -30,6 +30,11 @@ export function Post () {
     })
   }, [postId])
 
+  const handleDelete = async () => {
+    await deletePost(postId)
+    navigate('/')
+  }
+
   const handleLike = async () => {
     if (!user) navigate('/login')
     const res = await addLike(postId)
@@ -40,9 +45,19 @@ export function Post () {
 
   return (
 
-    <ContentContainer styles={'bg-white w-[97%] mr-auto rounded p-2'}>
+    <ContentContainer styles={'bg-white w-[97%] dark:bg-[#171717] mr-auto rounded p-2'}>
       {post && (
         <div className='w-[98%] m-auto '>
+          {user.username === post.author.username && (
+            <div className='flex w-full justify-end'>
+              <button
+                onClick={handleDelete}
+                className='bg-red-500  text-white py-2 px-4 mt-4 rounded hover:bg-red-600'
+              >
+                Delete Post
+              </button>
+            </div>
+          )}
 
           <PostAuthorInfo author={post.author} postDate={formattedData} />
           <div className='w-full left-5 flex items-center '>
@@ -55,7 +70,7 @@ export function Post () {
             <PostTags tags={post.tags} />
           </div>
 
-          <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
+          <ReactMarkdown className='markdown-content prose lg:prose-xl max-w-none border-b dark:border-gray-800 pb-2' remarkPlugins={[remarkGfm]} components={markdownStyles}>{post.content}</ReactMarkdown>
           <Comment post={post} />
           <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
         </div>

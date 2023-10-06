@@ -78,15 +78,38 @@ export class UserController {
 
   }
 
-  static async setProfileCustomization (req, res) {
+  static async setTheme (req, res) {
     const { theme } = req.body
 
     try {
-      console.log(theme)
+      const user = await User.findById(req.user.id);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+
+      const profile = await Profile.findOne({ user: user.id });
+      if (!profile) return res.status(404).json({ message: 'Profile not found' });
+
+      profile.theme = theme
+      await profile.save();
+
+      res.json(profile.theme);
     } catch (error) {
-      // Handle any errors that may occur during the process
-      console.error(error);
-      throw error;
+      res.status(500).json({ error: error.message })
     }
   }
+
+  static async getTheme(req, res) {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const profile = await Profile.findOne({ user: user.id });
+    if (!profile) return res.status(404).json({ message: 'Profile not found' });
+
+    res.json(profile.theme);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
 }

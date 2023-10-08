@@ -19,18 +19,21 @@ import { SettingsPage } from './pages/profile/SettingsPage'
 import { SettingsCustomization } from './pages/profile/SettingsCustomization'
 import { useUser } from './context/UserContext'
 import { useAuth } from './context/AuthContext'
+import { ThreeDotsLoader } from './components/ui/Loader'
 
 export default function App () {
   const { theme } = useUser()
-  const { loading } = useAuth()
+  const { loading, isAuthenticated } = useAuth()
 
   if (loading) {
-    return <div className='flex justify-center items-center h-screen' >Loading...</div>
+    return <div className='flex justify-center items-center h-screen' > <ThreeDotsLoader /></div>
   }
+
+  const defaultTheme = isAuthenticated ? theme : 'light'
 
   return (
 
-    <main className={`bg-[#efefef] h-screen w-screen overflow-x-hidden  ${theme === 'dark' ? 'dark bg-black duration-75 text-white' : ''}`} >
+    <main className={`bg-[#efefef] h-screen w-screen overflow-x-hidden  ${defaultTheme === 'dark' ? 'dark bg-black duration-75 text-white' : ''}`} >
       <Navbar />
 
       <Routes>

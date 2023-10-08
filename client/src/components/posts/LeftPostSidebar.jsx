@@ -5,10 +5,10 @@ import { BsThreeDots } from 'react-icons/bs'
 import { FaRegCommentDots } from 'react-icons/fa'
 import { FcLike } from 'react-icons/fc'
 
-export function PostSidebar ({ userLiked, handleLike, post }) {
+export function LeftPostSidebar ({ userLiked, handleLike, post }) {
   return (
-    <aside className='w- mr-auto overflow-hidden z-10 h-full hidden md:block    bg-gray-100 shadow-sm dark:bg-black'>
-      <div className='flex gap-y-2  flex-col items-center h-full'>
+    <aside className='w-[7%] lg:w-[13%] mr-auto overflow-hidden z-10 hidden md:block bg-gray-100 shadow-sm  dark:bg-black'>
+      <div className='flex gap-y-2  flex-col items-center h-full '>
         <div className='flex flex-col gap-1 items-center hover:bg-gray-200 p-2 rounded dark:hover:bg-[#171717]'>
           {userLiked
             ? (

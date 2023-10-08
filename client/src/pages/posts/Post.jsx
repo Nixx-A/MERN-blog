@@ -12,8 +12,9 @@ import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { PostActions } from '../../components/posts/PostAction'
 import PostTags from '../../components/posts/PostTags'
 import { PostAuthorInfo } from '../../components/posts/PostAuthorInfo'
-import { PostSidebar } from '../../components/posts/PostSidebar'
+import { LeftPostSidebar } from '../../components/posts/LeftPostSidebar'
 import DeletePostBtn from '../../components/posts/DeletePostBtn'
+import RightPostSidebar from '../../components/posts/RightPostSidebar'
 
 export function Post () {
   const navigate = useNavigate()
@@ -50,9 +51,7 @@ export function Post () {
     <ContentContainer styles={'bg-white w-[97%] md:flex dark:bg-black mr-auto rounded p-2'}>
       {post && (
         <>
-          <div className='md:bock w-[10%] lg:w-[7%]'>
-            <PostSidebar post={post} userLiked={userLiked} handleLike={handleLike} />
-          </div>
+          <LeftPostSidebar post={post} userLiked={userLiked} handleLike={handleLike} />
 
           <div className='w-full p-2 m-auto md:pl-4 dark:bg-[#171717]'>
             {user.username === post.author.username && (
@@ -75,6 +74,8 @@ export function Post () {
             <Comment post={post} />
             <PostActions handleLike={handleLike} post={post} userLiked={userLiked} />
           </div>
+
+          <RightPostSidebar author={post.author} />
         </>
       )}
     </ContentContainer>

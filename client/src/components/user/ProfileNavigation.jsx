@@ -11,7 +11,7 @@ export function ProfileNavigation ({ handleOptionChange, username }) {
       </select>
 
       <Link
-        to={`/${username}`}
+        to={`/profile/${username.id}`}
         className='text-indigo-700 dark:text-indigo-500 font-semibold text-lg md:text-2xl '>
         @{username}
       </Link>

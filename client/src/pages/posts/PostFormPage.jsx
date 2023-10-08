@@ -60,7 +60,7 @@ export function PostFormPage () {
 
       <ContentContainer
         styles={
-          'pl-4 bg-white w-[98%] dark:bg-[#171717]  h-full rounded-md shadow pt-[80px] mt-0 '
+          'pl-4 bg-white w-[98%] dark:bg-[#171717] pb-12 rounded-md shadow pt-[80px] mt-0 '
         }>
         <form
           className='flex flex-col gap-y-5'

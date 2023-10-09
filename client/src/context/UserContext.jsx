@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { getPostsByUserRequest, changeSettingsRequest, getUserSettingsRequest, changeThemeRequest, getThemeRequest } from '../api/user'
 
 const UserContext = createContext()
@@ -53,19 +53,17 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const getTheme = async () => {
+  const getTheme = async (userId) => {
     try {
-      const res = await getThemeRequest()
+      const res = await getThemeRequest(userId)
       console.log(res)
-      setTheme(res.data)
+      if (res.status === 200) {
+        setTheme(res.data)
+      }
     } catch (error) {
       console.log(error)
     }
   }
-
-  useEffect(() => {
-    getTheme()
-  }, [])
 
   return (
     <UserContext.Provider value={{ userPosts, getPostsByUser, changeSettings, getUserSettings, userSettings, toggleTheme, theme, getTheme }}>

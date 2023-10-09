@@ -27,14 +27,14 @@ export function SettingsCustomization () {
   }
 
   useEffect(() => {
-    getTheme()
+    getTheme(user.id)
   }, [customTheme])
 
   return (
     <ContentContainer styles={'w-[95%] m-auto flex  gap-4'}>
       <SettingsSidebar />
 
-      <div className='flex flex-col w-full'>
+      <div className='w-1/2'>
         <ProfileNavigation handleOptionChange={handleOptionChange} username={user.username} />
 
         <form className='flex flex-col gap-4 mt-4' >
@@ -58,6 +58,7 @@ export function SettingsCustomization () {
             </div>
           </div>
         </form>
+
       </div>
     </ContentContainer>
   )

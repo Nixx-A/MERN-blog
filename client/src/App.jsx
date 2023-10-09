@@ -19,17 +19,20 @@ import { SettingsPage } from './pages/profile/SettingsPage'
 import { SettingsCustomization } from './pages/profile/SettingsCustomization'
 import { useUser } from './context/UserContext'
 import { useAuth } from './context/AuthContext'
-import { ThreeDotsLoader } from './components/ui/Loader'
-
+import { useEffect } from 'react'
 export default function App () {
-  const { theme } = useUser()
-  const { loading, isAuthenticated } = useAuth()
-
-  if (loading) {
-    return <div className='flex justify-center items-center h-screen' > <ThreeDotsLoader /></div>
-  }
+  const { theme, getTheme } = useUser()
+  const { loading, isAuthenticated, user } = useAuth()
 
   const defaultTheme = isAuthenticated ? theme : 'light'
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getTheme(user.id)
+    }
+  }, [isAuthenticated, getTheme])
+
+  if (loading) return <div className='flex justify-center items-center  h-screen'>Loading...</div>
 
   return (
 

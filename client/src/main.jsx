@@ -8,15 +8,15 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <UserProvider>
-      <PostsProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AuthProvider>
-      </PostsProvider>
-    </UserProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <UserProvider>
+    <PostsProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AuthProvider>
+    </PostsProvider>
+  </UserProvider>
+  //  </React.StrictMode>
 )

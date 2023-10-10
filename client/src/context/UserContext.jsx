@@ -28,7 +28,6 @@ export const UserProvider = ({ children }) => {
   const getUserSettings = async (userId) => {
     try {
       const res = await getUserSettingsRequest(userId)
-      console.log(res.data)
       setUserSettings(res.data)
     } catch (error) {
       console.log(error)
@@ -56,7 +55,6 @@ export const UserProvider = ({ children }) => {
   const getTheme = async (userId) => {
     try {
       const res = await getThemeRequest(userId)
-      console.log(res)
       if (res.status === 200) {
         setTheme(res.data)
       }

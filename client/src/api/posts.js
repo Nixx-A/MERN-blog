@@ -18,7 +18,7 @@ export const getPostsByTagRequest = async (tagId) => axios.get(`/posts/tag/${tag
 
 export const createCommentRequest = async (comment, postId) => axios.post(`/posts/${postId}/comments`, comment)
 
-export const deleteCommentRequest = async (commentId, postId) => axios.delete(`/posts/${postId}/comments/${commentId}`)
+export const deleteCommentRequest = async (commentId) => axios.delete(`/posts/comments/${commentId}`)
 
 export const addLikeRequest = async (postId) => axios.post(`/posts/${postId}/like`)
 

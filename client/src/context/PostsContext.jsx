@@ -121,9 +121,9 @@ export function PostsProvider ({ children }) {
     }
   }
 
-  const deleteComment = async (postId, commentId) => {
+  const deleteComment = async (commentId) => {
     try {
-      await deleteCommentRequest(postId, commentId)
+      await deleteCommentRequest(commentId)
     } catch (error) {
       console.log(error)
     }

@@ -20,7 +20,7 @@ router.put('/:id', authRequired, PostController.updatePost)
 
 router.get('/:postId/comments', CommentController.getComments);
 router.post('/:postId/comments', authRequired, CommentController.createComment);
-router.delete('/:postId/comments/:commentId', authRequired, CommentController.deleteComment);
+router.delete('/comments/:commentId', authRequired, CommentController.deleteComment);
 
 
 router.get('/tag/:tagId', TagController.getPostsByTag);

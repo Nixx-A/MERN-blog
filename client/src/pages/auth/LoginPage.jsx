@@ -1,14 +1,19 @@
 import { Label } from '../../components/ui/Label'
 import { Input } from '../../components/ui/Input'
 import { Methods } from './Methods'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ContentContainer } from '../../components/ui/ContentContainer'
 import { useLoginData } from '../../hooks/useLoginData'
 import { useForm } from 'react-hook-form'
+import { useAuth } from '../../context/AuthContext'
 
 export function LoginPage () {
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const { handleSubmit } = useForm()
   const { errors, onSubmit, register, registerErrors } = useLoginData()
+
+  if (user) navigate('/')
 
   const handleFormSubmit = async (values) => await onSubmit(values)
 

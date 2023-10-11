@@ -97,19 +97,20 @@ export class UserController {
     }
   }
 
-  static async getTheme(req, res) {
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
+  static async getTheme (req, res) {
+    const { userId } = req.params
+    try {
+      const user = await User.findById(userId);
+      if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const profile = await Profile.findOne({ user: user.id });
-    if (!profile) return res.status(404).json({ message: 'Profile not found' });
+      const profile = await Profile.findOne({ user: user.id });
+      if (!profile) return res.status(404).json({ message: 'Profile not found' });
 
-    res.json(profile.theme);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.json(profile.theme);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
-}
 
 
 }

@@ -8,7 +8,7 @@ import { CommentCard } from './CommentCard'
 
 export function Comment ({ post }) {
   const { user } = useAuth()
-  const { createComment } = usePosts()
+  const { createComment, deleteComment } = usePosts()
   const [showBtn, setShowBtn] = useState(false)
   const {
     register,
@@ -21,6 +21,12 @@ export function Comment ({ post }) {
     await createComment(data, post._id)
     window.location.reload()
   }
+
+  const handleDeleteComment = (commentId) => {
+    deleteComment(commentId)
+    window.location.reload()
+  }
+
   return (
     <div className=''>
       <div className='flex items-center gap-x-2 font-bold p-2'>
@@ -59,7 +65,7 @@ export function Comment ({ post }) {
 
       <div className='mt-8 mb-12'>
         {post.comments.map(comment => (
-          <CommentCard key={comment._id} comment={comment} />
+          <CommentCard key={comment._id} comment={comment} loggedUserId={user.id} onDelete={handleDeleteComment} />
         ))}
       </div>
     </div>

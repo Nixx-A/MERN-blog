@@ -39,11 +39,11 @@ export function SettingsPage () {
     <ContentContainer styles={'w-[95%] m-auto flex  gap-4'}>
       <SettingsSidebar />
 
-      <div>
+      <div >
         <ProfileNavigation handleOptionChange={handleOptionChange} username={user.username} />
 
         {/* Form section */}
-        <form className='flex flex-col gap-4 mt-4 ' onSubmit={handleSubmit(onSubmit)}>
+        <form className='flex flex-col gap-4 mt-4' onSubmit={handleSubmit(onSubmit)}>
           <div className='bg-white rounded dark:bg-[#171717] '>
             <h3 className='font-bold text-2xl p-3'>User</h3>
 

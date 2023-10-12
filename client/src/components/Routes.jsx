@@ -16,11 +16,16 @@ import { SettingsCustomization } from '../pages/profile/SettingsCustomization'
 import { SignoutConfirm } from '../pages/auth/SignoutConfirm'
 import { PostFormPage } from '../pages/posts/PostFormPage'
 import { ProtectedRoute } from '../ProtectedRoute'
+import { Error404 } from '../pages/404'
+import { LatestPosts } from '../pages/posts/LatestPosts'
+import { TopPosts } from '../pages/posts/TopPosts'
 
 export function MainRoutes () {
   return (
     <Routes>
       <Route path="/" element={<Posts />} />
+      <Route path="/latest" element={<LatestPosts />} />
+      <Route path="/top-week" element={<TopPosts />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<Methods />} />
       <Route path="/register-form" element={<RegisterForm />} />
@@ -30,7 +35,6 @@ export function MainRoutes () {
       <Route path="/about" element={<About />} />
       <Route path="/podcasts" element={<Podcasts />} />
       <Route path="/tag/:tagId/:tagName" element={<TagPostsPage />} />
-      <Route path="*" element={<Posts />} />
       <Route path="/post/:postId" element={<Post />} />
       <Route path="/profile/:userId" element={<ProfilePage />} />
 
@@ -41,6 +45,8 @@ export function MainRoutes () {
         <Route path="/new" element={<PostFormPage />} />
         <Route path="/posts/:id" element={<PostFormPage />} />
       </Route>
+
+      <Route path="*" element={<Error404 />} />
     </Routes>
   )
 }

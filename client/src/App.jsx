@@ -18,11 +18,9 @@ export default function App () {
   if (loading) return <div className='flex justify-center items-center  h-screen'>Loading...</div>
 
   return (
-
     <main className={`bg-[#efefef] h-screen w-screen overflow-x-hidden  ${defaultTheme === 'dark' ? 'dark bg-black duration-75 text-white' : ''}`} >
       <Navbar />
       <MainRoutes />
     </main>
-
   )
 }

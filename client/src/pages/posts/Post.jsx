@@ -54,9 +54,9 @@ export function Post () {
           <LeftPostSidebar post={post} userLiked={userLiked} handleLike={handleLike} />
 
           <div className='w-full p-2 m-auto md:pl-4 dark:bg-[#171717]'>
+            <PostAuthorInfo author={post.author} postDate={formattedData} />
             {user.username === post.author.username && (
               <div className='flex w-full items-center justify-between'>
-                <PostAuthorInfo author={post.author} postDate={formattedData} />
                 <DeletePostBtn handleDelete={handleDelete} />
               </div>
             )}

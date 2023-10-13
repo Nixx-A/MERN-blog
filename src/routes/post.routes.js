@@ -14,7 +14,7 @@ router.get('/top', PostController.getTopPosts)
 
 router.get('/tags', TagController.getTags);
 router.get('/:id', PostController.getPost)
-router.post('/', validateSchema(createPostSchema), authRequired, PostController.createPost)
+router.post('/',  PostController.createPost)
 router.delete('/:id', authRequired, PostController.deletePost)
 router.put('/:id', authRequired, PostController.updatePost)
 

@@ -48,10 +48,11 @@ export class PostController {
     }
   }
 
-  static async createPost (req, res) {
+  static async createPost(req, res) {
     const { title, content, tags } = req.body;
     try {
       let image = null;
+      
       if (req.files?.image) {
         const result = await uploadImage(req.files.image.tempFilePath);
         await fs.remove(req.files.image.tempFilePath);
@@ -60,27 +61,26 @@ export class PostController {
           public_id: result.public_id,
         };
       }
-
-      const newPost = await Post.create({
+  
+      const newPostData = {
         title,
         content,
+        author: req.user.id,
         image,
-        author: '650fa3236d487dbe0fdebf4f',
-      });
-
-      // Create or update tags for the post
+      };
+  
       const tagObjects = [];
       if (tags) {
         for (const tagName of tags) {
           let tag = await Tag.findOne({ name: tagName });
-
-          if (!tag) res.status(404).json({ message: 'Tag not found' });
-
-          tagObjects.push(tag._id); // Push the tag's ObjectId to the array
+  
+          if (!tag) return res.status(404).json({ message: 'Tag not found' });
+  
+          tagObjects.push(tag._id);
         }
-        newPost.tags = tagObjects; // Attach tag ObjectId(s) to the post
+        newPostData.tags = tagObjects; 
       }
-
+  
       const savedPost = await newPost.save();
       res.json(savedPost);
     } catch (error) {

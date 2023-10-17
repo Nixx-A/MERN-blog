@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { formatPostDate } from '../../utils/dateUtils'
+import { useAuth } from '../../context/AuthContext'
+import { useEffect, useState } from 'react'
 
-export function CommentCard ({ comment, onDelete, loggedUserId }) {
-  const currentUserIsAuthor = comment.author._id === loggedUserId
+export function CommentCard ({ comment, onDelete }) {
+  const { user } = useAuth()
+  const [isUserAuthor, setIsUserAuthor] = useState(false)
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this comment?')) {
@@ -10,6 +13,14 @@ export function CommentCard ({ comment, onDelete, loggedUserId }) {
       onDelete(comment._id)
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      if (user.id === comment.author._id) {
+        setIsUserAuthor(true)
+      }
+    }
+  }, [])
 
   return (
     <div className='flex gap-x-2 mb-8' key={comment._id}>
@@ -32,7 +43,7 @@ export function CommentCard ({ comment, onDelete, loggedUserId }) {
             <small className='text-gray-400 font-thin'>{formatPostDate(comment.createdAt)}</small>
           </div>
 
-          {currentUserIsAuthor && (
+          {isUserAuthor && (
             <button className='bg-red-500 text-white rounded-md px-4 py-1 hover:bg-red-700' onClick={handleDelete}>Delete</button>
           )}
         </div>

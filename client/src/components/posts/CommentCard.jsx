@@ -15,16 +15,14 @@ export function CommentCard ({ comment, onDelete }) {
   }
 
   useEffect(() => {
-    if (user) {
-      if (user.id === comment.author._id) {
-        setIsUserAuthor(true)
-      }
+    if (user && user.id === comment.author._id) {
+      setIsUserAuthor(true)
     }
   }, [])
 
   return (
     <div className='flex gap-x-2 mb-8' key={comment._id}>
-      <Link to={`/${comment.author._id}`}>
+      <Link to={`/profile/${comment.author._id}`}>
         <img
           src='/not-user.jpg'
           className='w-6 h-6 rounded-full '

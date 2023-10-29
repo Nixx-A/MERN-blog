@@ -54,6 +54,7 @@ export function Navbar() {
                 className='w-8 h-8 rounded-full border border-black dark:border-gray-500  cursor-pointer md:w-10 md:h-10 hover:border-indigo-600  mr-4'
                 onClick={() => setimgSidebarOpen(!imgSidebarOpen)}
                 src='/nutritionist.png'
+                alt='user-profile-img'
               />
               {imgSidebarOpen && <ImgSidebar setIsOpen={setimgSidebarOpen} />}
             </div>

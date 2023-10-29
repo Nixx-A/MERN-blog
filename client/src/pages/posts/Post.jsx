@@ -8,7 +8,6 @@ import remarkGfm from 'remark-gfm'
 import { markdownStyles } from '../../data/markdownStyles'
 import { Comment } from '../../components/posts/Comment'
 import { useAuth } from '../../context/AuthContext'
-import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { PostActions } from '../../components/posts/PostAction'
 import PostTags from '../../components/posts/PostTags'
 import { PostAuthorInfo } from '../../components/posts/PostAuthorInfo'
@@ -60,10 +59,6 @@ export function Post () {
               {user?.username === post?.author?.username && (
                 <DeletePostBtn handleDelete={handleDelete} />
               )}
-            </div>
-            <div className='w-full left-5 flex items-center '>
-              {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
-              <p>{post.likes.length}</p>
             </div>
 
             <div className='mb-8'>

@@ -33,8 +33,7 @@ export function PostFormPage () {
 
   useEffect(() => {
     getTags()
-    console.log(errors)
-  }, [errors])
+  }, [])
 
   return (
     <>

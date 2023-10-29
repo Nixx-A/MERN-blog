@@ -65,7 +65,7 @@ export function Comment ({ post }) {
 
       <div className='mt-8 mb-12'>
         {post.comments.map(comment => (
-          <CommentCard key={comment._id} comment={comment} loggedUserId={user.id} onDelete={handleDeleteComment} />
+          <CommentCard key={comment._id} comment={comment} onDelete={handleDeleteComment} />
         ))}
       </div>
     </div>

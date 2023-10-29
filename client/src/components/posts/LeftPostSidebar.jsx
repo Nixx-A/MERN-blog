@@ -7,7 +7,7 @@ import { FcLike } from 'react-icons/fc'
 
 export function LeftPostSidebar ({ userLiked, handleLike, post }) {
   return (
-    <aside className='w-[7%] lg:w-[13%] mr-auto overflow-hidden z-10 hidden md:block bg-gray-100 shadow-sm  dark:bg-black'>
+    <aside className='w-[7%] lg:w-[13%] mr-auto overflow-hidden z-10 hidden md:block bg-[#efefef] shadow-sm  dark:bg-black'>
       <div className='flex gap-y-2  flex-col items-center h-full '>
         <div className='flex flex-col gap-1 items-center hover:bg-gray-200 p-2 rounded dark:hover:bg-[#171717]'>
           {userLiked
@@ -22,13 +22,13 @@ export function LeftPostSidebar ({ userLiked, handleLike, post }) {
             )}
           <p>{post.likes.length}</p>
         </div>
-        <div className='flex flex-col items-center hover:bg-gray-200 p-2 gap-y-1 rounded cursor-pointer dark:hover:bg-[#171717]'>
+        <div className='flex flex-col items-center hover:bg-gray-200 dark:hover:text-indigo-500 hover:text-indigo-700 p-2 gap-y-1 rounded cursor-pointer duration-150 dark:hover:bg-[#171717]'>
           <FaRegCommentDots className='w-5 h-5' />
-          <p>{post.comments.length}</p>
+          <p className=' text-black dark:text-gray-200'>{post.comments.length}</p>
         </div>
 
         <div className='hover-bg-gray-200 p-2 rounded'>
-          <BiBookmark className='w-6 h-6 cursor-pointer hover:text-indigo-500 duration-150' />
+          <BiBookmark className='w-6 h-6 cursor-pointer dark:hover:text-indigo-500 hover:text-indigo-700 duration-150' />
         </div>
         <div className='hover:bg-gray-200 p-2 rounded dark:hover:bg-[#171717]'>
           <BsThreeDots className='w-6 h-6 cursor-pointer' />

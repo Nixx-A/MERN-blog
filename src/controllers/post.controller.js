@@ -1,6 +1,8 @@
 import Post from '../models/database/Post.js'
 import Comment from '../models/database/Comment.js'
 import Tag from '../models/database/Tag.js';
+import { deleteImage, uploadImage } from "../libs/cloudinary.js";
+import fs from "fs-extra";
 
 export class PostController {
   static async getPosts (req, res) {
@@ -46,30 +48,40 @@ export class PostController {
     }
   }
 
-  static async createPost (req, res) {
+  static async createPost(req, res) {
     const { title, content, tags } = req.body;
-
     try {
-      const newPost = await Post.create({
+      let image = null;
+      
+      if (req.files?.image) {
+        const result = await uploadImage(req.files.image.tempFilePath);
+        await fs.remove(req.files.image.tempFilePath);
+        image = {
+          url: result.secure_url,
+          public_id: result.public_id,
+        };
+      }
+  
+      const newPostData = {
         title,
         content,
         author: req.user.id,
-      });
-
-      // Create or update tags for the post
+        image,
+      };
+  
       const tagObjects = [];
-      for (const tagName of tags) {
-        let tag = await Tag.findOne({ name: tagName });
-
-        if (!tag) res.status(404).json({ message: 'Tag not found' });
-
-        tagObjects.push(tag._id); // Push the tag's ObjectId to the array
+      if (tags) {
+        for (const tagName of tags) {
+          let tag = await Tag.findOne({ name: tagName });
+  
+          if (!tag) return res.status(404).json({ message: 'Tag not found' });
+  
+          tagObjects.push(tag._id);
+        }
+        newPostData.tags = tagObjects; 
       }
-
-      newPost.tags = tagObjects; // Attach tag ObjectId(s) to the post
-      console.log(newPost);
+  
       const savedPost = await newPost.save();
-
       res.json(savedPost);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -116,6 +128,10 @@ export class PostController {
       const post = await Post.findByIdAndDelete(id)
       if (!post) return res.status(404).json({ message: 'Post not found' })
 
+      if (post && post.image.public_id) {
+        await deleteImage(post.image.public_id)
+      }
+
       res.sendStatus(204)
     } catch (error) {
       res.status(500).json({ error: error.message })
@@ -143,7 +159,7 @@ export class PostController {
         .populate('tags')
         .lean()
 
-        if (!latestPosts) return res.status(404).json({ message: 'Posts not found'})
+      if (!latestPosts) return res.status(404).json({ message: 'Posts not found' })
 
       res.json(latestPosts)
     } catch (error) {
@@ -153,14 +169,14 @@ export class PostController {
 
   static async getTopPosts (req, res) {
     try {
-     const topPosts = await Post.find()
-     .sort({ likes: -1 })
-     .limit(10)
-     .populate('author')
-     .populate('tags')
-     .lean()
+      const topPosts = await Post.find()
+        .sort({ likes: -1 })
+        .limit(10)
+        .populate('author')
+        .populate('tags')
+        .lean()
 
-     res.json(topPosts)
+      res.json(topPosts)
     } catch (error) {
       res.status(500).json({ error: error.message })
     }

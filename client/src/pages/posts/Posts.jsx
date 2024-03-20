@@ -3,8 +3,7 @@ import { useEffect } from 'react'
 import { ListOfPostsCards } from '../../components/posts/ListOfPostsCards'
 
 export function Posts () {
-  const { posts, getPosts, loading, setLoading } =
-    usePosts()
+  const { posts, getPosts, loading, setLoading } = usePosts()
 
   useEffect(() => {
     setLoading(true)

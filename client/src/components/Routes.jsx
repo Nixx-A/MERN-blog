@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
+
 import { Posts } from '../pages/posts/Posts'
+import { LatestPosts } from '../pages/posts/LatestPosts'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { Methods } from '../pages/auth/Methods'
 import { RegisterForm } from '../pages/auth/RegisterFormPage'
@@ -17,7 +19,6 @@ import { SignoutConfirm } from '../pages/auth/SignoutConfirm'
 import { PostFormPage } from '../pages/posts/PostFormPage'
 import { ProtectedRoute } from '../ProtectedRoute'
 import { Error404 } from '../pages/404'
-import { LatestPosts } from '../pages/posts/LatestPosts'
 import { TopPosts } from '../pages/posts/TopPosts'
 
 export function MainRoutes () {

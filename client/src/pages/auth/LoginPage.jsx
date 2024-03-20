@@ -13,7 +13,10 @@ export function LoginPage () {
   const { handleSubmit } = useForm()
   const { errors, onSubmit, register, registerErrors } = useLoginData()
 
-  if (user) navigate('/')
+  if (user) {
+    navigate('/')
+    return null
+  }
 
   const handleFormSubmit = async (values) => await onSubmit(values)
 

@@ -5,6 +5,7 @@ import profileRoutes from '../routes/user.routes.js'
 import authRoutes from "../routes/auth.routes.js";
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
+import fileUpload from 'express-fileupload';
 
 const app = express()
 
@@ -15,6 +16,10 @@ const corsOptions = {
 
 app.use(express.json())
 app.use(cors(corsOptions))
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: './upload'
+}))
 app.use(morgan('dev'))
 app.use(cookieParser())
 

@@ -38,7 +38,7 @@ export class TagController {
       const tag = await Tag.findById(tagId);
       if (!tag) return res.status(404).json({ message: 'Tag not found' });
 
-      const posts = await Post.find({ tags: tagId }).lean().populate('tags')
+      const posts = await Post.find({ tags: tagId }).lean().populate('tags').populate('author')
 
       const postIds = posts.map((post) => post._id);
       

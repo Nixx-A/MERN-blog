@@ -8,7 +8,6 @@ import remarkGfm from 'remark-gfm'
 import { markdownStyles } from '../../data/markdownStyles'
 import { Comment } from '../../components/posts/Comment'
 import { useAuth } from '../../context/AuthContext'
-import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { PostActions } from '../../components/posts/PostAction'
 import PostTags from '../../components/posts/PostTags'
 import { PostAuthorInfo } from '../../components/posts/PostAuthorInfo'
@@ -29,7 +28,9 @@ export function Post () {
   useEffect(() => {
     getPost(postId).then(fetchedPost => {
       setPost(fetchedPost)
-      setUserLiked(fetchedPost.likes.includes(user.id))
+      if (user && fetchedPost.likes.includes(user.id)) {
+        setUserLiked(true)
+      }
     })
   }, [postId])
 
@@ -47,22 +48,17 @@ export function Post () {
   }
 
   return (
-
-    <ContentContainer styles={'bg-white w-[97%] md:flex dark:bg-black mr-auto rounded p-2'}>
+    <ContentContainer styles={'bg-[#efefef] w-[97%] md:flex dark:bg-black mr-auto rounded p-2'}>
       {post && (
         <>
           <LeftPostSidebar post={post} userLiked={userLiked} handleLike={handleLike} />
 
-          <div className='w-full p-2 m-auto md:pl-4 dark:bg-[#171717]'>
-            <PostAuthorInfo author={post.author} postDate={formattedData} />
-            {user.username === post.author.username && (
-              <div className='flex w-full items-center justify-between'>
+          <div className='w-full p-2 m-auto md:pl-4 bg-white dark:bg-[#171717]'>
+            <div className='flex w-full items-center justify-between'>
+              <PostAuthorInfo author={post.author} postDate={formattedData} />
+              {user?.username === post?.author?.username && (
                 <DeletePostBtn handleDelete={handleDelete} />
-              </div>
-            )}
-            <div className='w-full left-5 flex items-center '>
-              {userLiked ? <FcLike onClick={handleLike} /> : <FcLikePlaceholder onClick={handleLike} />}
-              <p>{post.likes.length}</p>
+              )}
             </div>
 
             <div className='mb-8'>

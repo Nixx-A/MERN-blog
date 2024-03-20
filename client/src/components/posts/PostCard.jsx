@@ -25,7 +25,10 @@ export default function PostCard ({ post }) {
 
       <div className='flex justify-between items-center w-[95%] m-auto  '>
         <div className='flex'>
+          <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded dark:hover:bg-black '>
           <LikeButton isUserLiked={isUserLiked} likes={post.likes.length} />
+          <p>{post.likes.length}</p>
+          </div>
           <div className='flex items-center hover:bg-gray-100 gap-x-1 px-1.5 py-0.5 border-none hover:border rounded dark:hover:bg-black '>
             <FaRegCommentDots color='gray' />
             <p>{post.comments.length}</p>

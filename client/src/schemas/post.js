@@ -8,7 +8,10 @@ export const postSchema = z.object({
   content: z
     .string()
     .min(3, { message: 'Content must be at least 3 characters long' })
-    .refine(value => value.trim().length >= 3, { message: "You can't leave an empty content" })
+    .refine(value => value.trim().length >= 3, { message: "You can't leave an empty content" }),
+  coverImage: z
+    .optional()
+
 })
 
 export const createCommentSchema = z.object({

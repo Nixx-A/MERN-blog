@@ -24,3 +24,5 @@ export default function App () {
     </main>
   )
 }
+
+// things to add later include: edit post feature, enhance performance, stop reload when user create a comment, add feature to add image to post and user profile, add pagination or infinity scroll

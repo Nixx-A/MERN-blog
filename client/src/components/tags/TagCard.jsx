@@ -19,7 +19,7 @@ export function TagCard ({ tag }) {
       <Link to={`/tag/${tag._id}/${tag.name}`}>
         <div className='flex gap-x-2 items-center justify-between'>
           <p>#{tag.name}</p>
-          <p className='text-gray-600 text-sm font-normal'>{tag.postIds.length} posts</p>
+          <p className='text-gray-600 text-sm font-normal dark:text-white'>{tag.postIds.length} posts</p>
         </div>
       </Link>
 

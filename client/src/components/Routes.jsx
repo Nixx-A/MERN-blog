@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
+
 import { Posts } from '../pages/posts/Posts'
+import { LatestPosts } from '../pages/posts/LatestPosts'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { Methods } from '../pages/auth/Methods'
 import { RegisterForm } from '../pages/auth/RegisterFormPage'
@@ -17,45 +19,34 @@ import { SignoutConfirm } from '../pages/auth/SignoutConfirm'
 import { PostFormPage } from '../pages/posts/PostFormPage'
 import { ProtectedRoute } from '../ProtectedRoute'
 import { Error404 } from '../pages/404'
-import { LatestPosts } from '../pages/posts/LatestPosts'
 import { TopPosts } from '../pages/posts/TopPosts'
 
 export function MainRoutes () {
-  const routes = [
-    { path: '/', element: <Posts /> },
-    { path: '/latest', element: <LatestPosts /> },
-    { path: '/top-week', element: <TopPosts /> },
-    { path: '/login', element: <LoginPage /> },
-    { path: '/register', element: <Methods /> },
-    { path: '/register-form', element: <RegisterForm /> },
-    { path: '/search', element: <SearchPage /> },
-    { path: '/tags', element: <TagsPage /> },
-    { path: '/faq', element: <Faq /> },
-    { path: '/about', element: <About /> },
-    { path: '/podcasts', element: <Podcasts /> },
-    { path: '/tag/:tagId/:tagName', element: <TagPostsPage /> },
-    { path: '/post/:postId', element: <Post /> },
-    { path: '/profile/:userId', element: <ProfilePage /> }
-  ]
-
-  const protectedRoutes = [
-    { path: '/settings/profile/', element: <SettingsPage /> },
-    { path: '/settings/customization', element: <SettingsCustomization /> },
-    { path: 'signout-confirm', element: <SignoutConfirm /> },
-    { path: '/new', element: <PostFormPage /> },
-    { path: '/posts/:id', element: <PostFormPage /> }
-  ]
-
   return (
     <Routes>
-      {routes.map((route) => (
-        <Route key={route.path} path={route.path} element={route.element} />
-      ))}
+      <Route path="/" element={<Posts />} />
+      <Route path="/latest" element={<LatestPosts />} />
+      <Route path="/top-week" element={<TopPosts />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<Methods />} />
+      <Route path="/register-form" element={<RegisterForm />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/tags" element={<TagsPage />} />
+      <Route path="/faq" element={<Faq />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/podcasts" element={<Podcasts />} />
+      <Route path="/tag/:tagId/:tagName" element={<TagPostsPage />} />
+      <Route path="/post/:postId" element={<Post />} />
+      <Route path="/profile/:userId" element={<ProfilePage />} />
+
       <Route element={<ProtectedRoute />}>
-        {protectedRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        <Route path="/settings/profile/" element={<SettingsPage />} />
+        <Route path="/settings/customization" element={<SettingsCustomization />} />
+        <Route path="signout-confirm" element={<SignoutConfirm />} />
+        <Route path="/new" element={<PostFormPage />} />
+        <Route path="/posts/:id" element={<PostFormPage />} />
       </Route>
+
       <Route path="*" element={<Error404 />} />
     </Routes>
   )

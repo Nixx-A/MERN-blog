@@ -33,7 +33,7 @@ export function CommentCard ({ comment, onDelete }) {
         <div className='flex gap-x-2 mb-2 justify-between items-center'>
 
           <div className='flex items-center gap-x-2'>
-            <Link to={`/${comment.author._id}`}>
+            <Link to={`/profile/${comment.author._id}`}>
               <p className='text-gray-500/90 font-semibold dark:text-gray-300 dark:hover:text-white'>
                 {comment.author.username}
               </p>

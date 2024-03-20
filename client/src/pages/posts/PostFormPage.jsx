@@ -9,23 +9,25 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema } from '../../schemas/post'
 
 export function PostFormPage () {
-  const [isModalOpen, setisModalOpen] = useState(false)
   const { getTags, createPost } = usePosts()
   const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedImg, setSelectedImg] = useState(null)
 
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({ resolver: zodResolver(postSchema) })
+  } = useForm()
   const navigate = useNavigate()
 
   const onSubmit = async data => {
     try {
+      const coverImage = data.coverImage[0]
+      console.log(coverImage)
       const alteredData = { ...data, tags: selectedOptions }
-      console.log(alteredData)
-      createPost(alteredData)
-      navigate('/')
+      console.log(data)
+      // createPost(alteredData)
+      // navigate('/')
     } catch (error) {
       console.log(error)
     }
@@ -34,6 +36,17 @@ export function PostFormPage () {
   useEffect(() => {
     getTags()
   }, [])
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    console.log(file)
+    console.log(selectedImg)
+    if (file) {
+      const imgUrl = URL.createObjectURL(file)
+      console.log(imgUrl)
+      setSelectedImg(imgUrl)
+    }
+  }
 
   return (
     <>
@@ -49,7 +62,6 @@ export function PostFormPage () {
             </button>
             <Link to='/'>
               <AiOutlineClose
-                onClick={() => setisModalOpen(!isModalOpen)}
                 className='relative bottom-1 indigo-hover w-auto h-auto font-semibold'
               />
             </Link>
@@ -64,16 +76,17 @@ export function PostFormPage () {
         <form
           className='flex flex-col gap-y-5'
           onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label className='font-semibold border-2  rounded-md cursor-pointer p-2 relative ml-2'>
-              Add a cover image
-              <input
-                type='file'
-                name='cover-image'
-                className='absolute top-0 left-0 right-0 bottom-0 opacity-0 cursor-pointer'
-              />
-            </label>
-          </div>
+
+          Add a cover image
+          <input
+            accept='image/*'
+            type='file'
+            name='coverImage'
+            className=' cursor-pointer'
+            onChange={handleImageChange}
+            {...register('coverImage')}
+          />
+          {selectedImg && <img src={selectedImg} />}
 
           {errors.title && <p className='text-red-500'>{errors.title?.message}</p>}
           <textarea
